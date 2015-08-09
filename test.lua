@@ -18,8 +18,15 @@ local inFile = 'data/train.src.seq.fea'
 local BatchSize = 1024
 local outFile = 'data/train.src.seq.fea.t7'
 
---WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
-local inFile = 'data/train.pair.tok.tsv'
-local outfile = 'data/train.logpD.s75'
-ComputelogPD.LargeScaleComputeLogPD(inFile, 2, 0.75, 1, outfile)
+WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
+
+local inFile = 'data/train.tgt.seq.fea'
+local BatchSize = 1024
+local outFile = 'data/train.tgt.seq.fea.t7'
+
+WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
+
+--local inFile = 'data/train.pair.tok.tsv'
+--local outfile = 'data/train.logpD.s75'
+--ComputelogPD.LargeScaleComputeLogPD(inFile, 2, 0.75, 1, outfile)
 

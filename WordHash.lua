@@ -91,46 +91,77 @@ function WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
 -- m_rgFeaIdx: feat index
 -- m_rgFeaVal: feat number
 -- nMaxFeatureDimension: maxDimension.
+
+--[[ data structure: 
+    ----------------------------------------------------------------------------------------------
+    | seg_size | element_size | rgSampleIdx (1024) | rgSegIdx (seg_size) | rgFeaIdx | rgvalueIdx |
+    ----------------------------------------------------------------------------------------------
+]]--
     local nMaxFeatureDimension = 0
     local nMaxFeatureNumPerBatch = 0
     local featureDimension = 0
     local nMaxSegmentSize = 0
+    local nLine = 0
 
     local batch = Batch.init()
 
     local f = assert(io.open(inFile, "r"))
     for line in f:lines() do 
-        
+        nLine = nLine + 1
         local rgWfs = utils.String2Matrix(line)
-        --print(mt)
         
         if batch.BatchSize == BatchSize then
+            -- currently store the batch as torch.cat between the torch tensor (better solution?)
+            -- havn't test the efficiency of torch.cat.
+            if batch.ElementSize > nMaxFeatureNumPerBatch then
+                nMaxFeatureNumPerBatch = batch.ElementSize
+            end
 
-
+            if not tensor then
+                tensor = batch:WriteSeqSample()
+            else
+                tensor = torch.cat(tensor, batch:WriteSeqSample())
+        
+            end
+            batch:Clear()
         end
         
         local featureDimension = batch:LoadSeqSample(rgWfs)
         if featureDimension > nMaxFeatureDimension then
             nMaxFeatureDimension = featureDimension
         end
-        if batch.SegSize() > nMaxSegmentSize then
-            nMaxSegmentSize = batch.SegSize()
+        if batch.SegSize > nMaxSegmentSize then
+            nMaxSegmentSize = batch.SegSize
         end
-        print(nMaxFeatureDimension)
-        print(nMaxSegmentSize)
-        break
+
+
     end
 
-    if batch.BatchSize() > 0 then
-        if batch.ElementSize() > nMaxFeatureNumPerBatch then
-            nMaxFeatureNumPerBatch = batch.ElementSize()
+    if batch.BatchSize > 0 then
+        if batch.ElementSize > nMaxFeatureNumPerBatch then
+            nMaxFeatureNumPerBatch = batch.ElementSize
         end
-        batch.WriteSeqSample()
-        batch.Clear()
+        if not tensor then
+            tensor = batch:WriteSeqSample()
+        else
+            tensor = torch.cat(tensor, batch:WriteSeqSample())
+        end
+        batch:Clear()
     end
 
+    local last_tensor = torch.IntTensor(5)
+
+    last_tensor[1] = nMaxFeatureDimension
+    last_tensor[2] = nLine
+    last_tensor[3] = nMaxSegmentSize
+    last_tensor[4] = nMaxFeatureNumPerBatch
+    last_tensor[5] = BatchSize
+
+    tensor = torch.cat(tensor, last_tensor)
+
+    -- save to torch.t7
+    print('saving ' .. outFile)
+    torch.save(outFile, tensor)
 end
-
-
 
 return WordHash
