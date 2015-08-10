@@ -1,4 +1,4 @@
 # CDSSM
 CDSSM implementation in torch
 
-# Inprocessing
+The Project is in processing. 
