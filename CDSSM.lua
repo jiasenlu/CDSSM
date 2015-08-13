@@ -3,7 +3,7 @@
 require 'torch'
 require 'nn'
 
-function DNN.init()
+function CDSSM.init()
 
 
 
@@ -11,12 +11,12 @@ function DNN.init()
 
 end
 
-function DNN.training()
+function CDSSM.training()
 
 end
 
 
-function DNN.ModelInit_FromConfig(feature_size, layerDim, activation, sigma, arch, wind, backupOnly)
+function CDSSM.ModelInit_FromConfig(feature_size, layerDim, activation, sigma, arch, wind, backupOnly)
 
     -- initialzing the network
 
@@ -53,7 +53,7 @@ end
 
 
 
-function DNN.LoadTrainData(srcFile, tgtFile)
+function CDSSM.LoadTrainData(srcFile, tgtFile)
 
     -- Construct shuffleTrain file
 
@@ -68,7 +68,7 @@ function DNN.LoadTrainData(srcFile, tgtFile)
 end
 
 
-function DNN.LoadPairDataAtIdx()
+function CDSSM.LoadPairDataAtIdx()
     -- print load pair tain data
     -- if objective type == NCE
         -- load nceProbFile
@@ -86,7 +86,7 @@ function DNN.LoadPairDataAtIdx()
 end
 
 
-function DNN.LoadTrainPairData(qFileName, dFileName, nceProbfile)
+function CDSSM.LoadTrainPairData(qFileName, dFileName, nceProbfile)
     -- function (LoadPairData())
 
 
@@ -96,7 +96,7 @@ function DNN.LoadTrainPairData(qFileName, dFileName, nceProbfile)
 
 end
 
-function DNN.LoadPairData(qFileName, dFileName, nceProbDistFile)
+function CDSSM.LoadPairData(qFileName, dFileName, nceProbDistFile)
     
 
     -- get dimension of qFile.
@@ -115,7 +115,7 @@ function DNN.LoadPairData(qFileName, dFileName, nceProbDistFile)
 end
 
 
-function DNN.get_dimension(FileName)
+function CDSSM.get_dimension(FileName)
     -- last five dimension
 
     -- function BatchSample_Input()
@@ -130,17 +130,17 @@ function DNN.get_dimension(FileName)
 
 end
 
-function DNN.BatchSample_Input(max_batch_size, maxSequence_perBatch, maxElement_perBatch)
+function CDSSM.BatchSample_Input(max_batch_size, maxSequence_perBatch, maxElement_perBatch)
 
 
 
 
 end
 
-function DNN.ConstructShuffleTrainFiles(file)
+function CDSSM.ConstructShuffleTrainFiles(file)
     -- seems only shuffle the train file name if there are multiple file
 
 
 end
 
-return DNN
+return CDSSM

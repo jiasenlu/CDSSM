@@ -2,7 +2,7 @@
 
 require 'torch'
 require 'nn'
-
+local SequenceInputStream = require 'SequenceInputStream'
 
 cmd = torch.CmdLine()
 cmd:text()
@@ -50,5 +50,10 @@ if opt.objective == 'NCE' then
 
 end
 
+local data_dir = 'data'
+local fileName = 'train.src.seq.fea.t7'
+local qStream = SequenceInputStream.init()
+--print(qStream.total_batch_size)
+qStream:get_dimension(data_dir, fileName, opt)
 
-print(opt)
+print(qStream)

@@ -4,6 +4,7 @@ require 'torch'
 
 local WordHash = require 'WordHash'
 local ComputelogPD = require 'ComputelogPD'
+local SequenceInputStream = require 'SequenceInputStream'
 
 local inFile = 'data/train.pair.tok.tsv'
 local srcVocFile = 'data/l3g.txt'
@@ -18,15 +19,21 @@ local inFile = 'data/train.src.seq.fea'
 local BatchSize = 1024
 local outFile = 'data/train.src.seq.fea.t7'
 
-WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
+--WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
 
 local inFile = 'data/train.tgt.seq.fea'
 local BatchSize = 1024
 local outFile = 'data/train.tgt.seq.fea.t7'
 
-WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
+--WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
 
 --local inFile = 'data/train.pair.tok.tsv'
 --local outfile = 'data/train.logpD.s75'
 --ComputelogPD.LargeScaleComputeLogPD(inFile, 2, 0.75, 1, outfile)
 
+
+local data_dir = 'data'
+local fileName = 'train.src.seq.fea.t7'
+local qStream = SequenceInputStream.init()
+--print(qStream.total_batch_size)
+qStream:get_dimension(data_dir, fileName)
