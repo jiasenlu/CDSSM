@@ -22,6 +22,7 @@ function SequenceInputStream.init()
 end
 
 function SequenceInputStream:get_dimension(data_dir, fileName, opt)
+    
     self.mstream = torch.load(path.join(data_dir, fileName))
     self.feature_size = self.mstream[-5]
     self.total_batch_size = self.mstream[-4]
@@ -34,7 +35,7 @@ function SequenceInputStream:get_dimension(data_dir, fileName, opt)
 
     self.Data = Sample.BatchSample_Input(batch_size, self.maxSequence_perBatch, self.maxElement_perBatch)
 
-    self.batch_num = math.ceil(self.total_batch_size)/batch_size
+    self.batch_num = math.ceil(self.total_batch_size/batch_size)
     self.last_incomplete_batch_size = self.total_batch_size % batch_size
     self.batch_index = 0
 

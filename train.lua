@@ -2,7 +2,7 @@
 
 require 'torch'
 require 'nn'
-local SequenceInputStream = require 'SequenceInputStream'
+local DSSM_Train = require 'DSSM_Train'
 
 cmd = torch.CmdLine()
 cmd:text()
@@ -36,6 +36,11 @@ cmd:option('-target_activation', '1 - 1', '0:Linear, 1:Tanh, 2: rectified')
 cmd:option('-target_arch', '1 - 0', '0: Fully Connected, 1: Convolutional')
 cmd:option('-target_arch_wind', '3 - 1', '')
 
+
+cmd:option('-feature_dimension_query', 0, '')
+
+cmd:option('-feature_dimension_doc', 0, '')
+
 cmd:option('-mirror_init', 0, '')
 cmd:option('-device', 'gpu', '')
 cmd:option('-reject_rate', 1, '')
@@ -51,9 +56,11 @@ if opt.objective == 'NCE' then
 end
 
 local data_dir = 'data'
-local fileName = 'train.src.seq.fea.t7'
-local qStream = SequenceInputStream.init()
---print(qStream.total_batch_size)
-qStream:get_dimension(data_dir, fileName, opt)
+local qFileName = 'train.src.seq.fea.t7'
+local dFileName = 'train.tgt.seq.fea.t7'
+local nceProbDisFile = 'train.logpD.s75'
 
-print(qStream)
+local dssm_train = DSSM_Train.init()
+dssm_train:LoadTrainData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
+print(dssm_train)
+--print(dssm_train)
