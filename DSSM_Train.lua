@@ -19,6 +19,7 @@ function DSSM_Train.init()
     self.TgtNorm = nil
     self.pairTrainFileIdx = 0
 
+    self.model = nil
     return self
 end
 
@@ -58,6 +59,8 @@ function DSSM_Train:ModelInit_FromConfig(opt)
     local batch_size = 1024
     -- input is feature_size * window_size, filter is the same size. if we use the 
     -- 3D tensor, then the [dw] == 1
+
+    -- 3D initilzation is saving the memory than 2D initilzation
     local Index_layer = nn.Identity()()
     local Q_1_layer = nn.TemporalConvolution(Q_feature_size * wind_size, 1000, 1)()
     local Q_1_link = nn.Tanh()(Q_1_layer)
@@ -84,14 +87,15 @@ function DSSM_Train:ModelInit_FromConfig(opt)
 
     -- get the non-sparse query, document and index
 
+    self.model = model
 
-    
-
-    
 end
 
+function DSSM_Train:Training()
+    self.PairStream.Init_Batch()
+    local trainingLoss = 0
 
 
 
-
+end
 return DSSM_Train

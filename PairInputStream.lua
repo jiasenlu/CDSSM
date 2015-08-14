@@ -23,7 +23,6 @@ function PairInputStream.init()
     self.dStream = nil
 
     return self
-
 end
 
 
@@ -39,7 +38,6 @@ function PairInputStream:Load_Train_PairData(data_dir, qFileName, dFileName, nce
     if opt.mirror_init == 1 then
         -- need to implement that.
     end
-
 end
 
 
@@ -53,7 +51,6 @@ function PairInputStream:Load_PairData(data_dir, qFileName, dFileName, nceProbDi
     if nceProbDisFile ~= nil then
 
     end
-
     self.Query_MaxSegment_batch = math.max(self.Query_MaxSegment_batch, self.qStream.maxSequence_perBatch)
     self.Doc_MaxSegment_batch = math.max(self.Doc_MaxSegment_batch, self.dStream.maxSequence_perBatch)
     self.maxSegment_batch = math.max(self.Query_MaxSegment_batch, self.Doc_MaxSegment_batch)
@@ -63,9 +60,19 @@ end
 function PairInputStream:InitFeatureNorm(srcNormalizer, tgtNormalizer)
     -- only handle min_max normalization here.
 
+end
 
+function PairInputStream:Init_Batch()
+    -- set the batch index to be 0
+    self.qStream.init_batch()
+    self.dStream.init_batch()
 
 end
 
+function PairInputStream:Next_Batch(srcNorm, tgtNorm)
+    -- get the next batch data.
 
+
+
+end
 return PairInputStream
