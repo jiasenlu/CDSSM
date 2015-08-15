@@ -92,10 +92,10 @@ function DSSM_Train:ModelInit_FromConfig(opt)
 end
 
 function DSSM_Train:Training()
-    self.PairStream.Init_Batch()
+    self.PairStream:Init_Batch()
     local trainingLoss = 0
 
-
+    self.PairStream:Next_Batch(SrcNorm, TgtNorm, opt)
 
 end
 return DSSM_Train

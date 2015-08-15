@@ -37,7 +37,7 @@ function SequenceInputStream:get_dimension(data_dir, fileName, opt)
 
     assert(batch_size == opt.batch_size, "batch_size does not match bettwen configuration and input data!")
 
-    self.Data = BatchSample.BatchSample_Input(batch_size, self.maxSequence_perBatch, self.maxElement_perBatch)
+    self.Data = BatchSample.init(batch_size, self.maxSequence_perBatch, self.maxElement_perBatch)
 
     self.batch_num = math.ceil(self.total_batch_size/batch_size)
     self.last_incomplete_batch_size = self.total_batch_size % batch_size
@@ -49,14 +49,24 @@ function SequenceInputStream:init_batch()
     self.batch_index = 1 -- set the first batch
 end
 
-function LoadDataBatch(allowedFeatureDimension)
+function SequenceInputStream:Fill(allowedFeatureDimension)
+    
+    if self.batch_index == self.batch_num then
+        return false
+    end
+    self:LoadDataBatch(allowedFeatureDimension)
+    self.batch_index = self.batch_index+1
+    return true
+end
+
+
+function SequenceInputStream:LoadDataBatch(allowedFeatureDimension)
     local expectedBatchSize = self.batch_size
     if self.batch_index == (self.batch_num-1) and self.last_incomplete_batch_size ~= 0 then
         expectedBatchSize = self.last_incomplete_batch_size
     end
-
     if self.feature_size <= allowedFeatureDimension then
-        self.Data.Load(self.mstream, expectedBatchSize)
+        self.Data:Load(self.mstream, expectedBatchSize)
     end
 
 

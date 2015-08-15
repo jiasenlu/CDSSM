@@ -1,10 +1,10 @@
 local BatchSample = {}
 BatchSample.__index = BatchSample
 
-function BatchSample.BatchSample_Input(max_batch_size, maxSequence_perBatch, maxElements_perBatch)
+function BatchSample.init(max_batch_size, maxSequence_perBatch, maxElements_perBatch)
 -- allocate the space for each sample
     local self = {}
-    setmetatable(self, SequenceInputStream)
+    setmetatable(self, BatchSample)
 
 
 
@@ -22,7 +22,7 @@ function BatchSample.BatchSample_Input(max_batch_size, maxSequence_perBatch, max
 end
 
 
-function BatchSample.Load(mstream, expectedBatchSize)
+function BatchSample:Load(mstream, expectedBatchSize)
     -- load into 1D sequence vector.
     local batch_size = expectedBatchSize
     local segsize = mstream[self.pointer]
@@ -36,31 +36,35 @@ function BatchSample.Load(mstream, expectedBatchSize)
         self.add_pointer()
     end
 
-    local smp_index = 0
+    --print(self.sample_Idx_Mem) test right
+
+    local smp_index = 1
     for i = 1, segsize do
         self.seg_Idx_Mem[i] = mstream[self.pointer]
         self.add_pointer()
-
-        while self.sample_Idx_Mem[smp_index] <= i then
+        while self.sample_Idx_Mem[smp_index] < i do
             smp_index = smp_index + 1
         end
         self.seg_Margin_Mem[i] = smp_index
-        seg_Len_Mem[i] = 0
+        self.seg_Len_Mem[i] = 0
     end
+
+    -- print(self.seg_Margin_Mem) test right
 
     for i = 1, elementsize do
         self.fea_Idx_Mem[i] = mstream[self.pointer]
         self.add_pointer()
     end
+    -- print(self.fea_Idx_Mem) the word level hash order maybe different-- mater?
+
 
     local sum = 0
-    local seg_index = 0
+    local seg_index = 1
 
     for i = 1, elementsize do
         self.fea_Value_Mem[i] = mstream[self.pointer]
         self.add_pointer()
-
-        while (self.seg_Len_Mem[seg_index] <= i) then
+        while (self.seg_Idx_Mem[seg_index] < i) do
             self.seg_Len_Mem[seg_index] = sum
             seg_index = seg_index + 1
             sum = 0
@@ -69,9 +73,7 @@ function BatchSample.Load(mstream, expectedBatchSize)
         sum = sum + self.fea_Value_Mem[i]
     end
     self.seg_Len_Mem[seg_index] = sum
-
+    -- print(self.seg_Len_Mem) checked right
 end
-
-
 
 return BatchSample

@@ -64,13 +64,17 @@ end
 
 function PairInputStream:Init_Batch()
     -- set the batch index to be 0
-    self.qStream.init_batch()
-    self.dStream.init_batch()
+    self.qStream:init_batch()
+    self.dStream:init_batch()
 
 end
 
-function PairInputStream:Next_Batch(srcNorm, tgtNorm)
+function PairInputStream:Next_Batch(srcNorm, tgtNorm, opt)
     -- get the next batch data.
+    if (not self.qStream:Fill(opt.feature_dimension_query)) or (not self.dStream:Fill(opt.feature_dimension_doc)) then
+        return false
+    end
+
 
 
 

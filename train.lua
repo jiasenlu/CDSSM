@@ -62,6 +62,9 @@ local nceProbDisFile = 'train.logpD.s75'
 
 local dssm_train = DSSM_Train.init()
 dssm_train:LoadTrainData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
-print(dssm_train)
 dssm_train:ModelInit_FromConfig(opt)
+dssm_train:Training()
+
+--print(self.PairStream.qStream.Data.fea_Idx_Mem)
+
 --print(dssm_train)
