@@ -100,18 +100,22 @@ function DSSM_Train:Training(qData, dData)
         -- doing the forward process
         
         -- negtive samping index
-        local postive_index = torch.range(1,1024):type('torch.LongTensor')
-        local negtive_index = self:Negative_Sampling(opt.batch_size, opt)
+        local batch_size = self.PairStream.qStream.dataFun.batch_size
+        print(batch_size)
+        local postive_index = torch.range(1,batch_size):type('torch.LongTensor')
+        local negtive_index = self:Negative_Sampling(batch_size, opt)
         local all_index = torch.cat(postive_index, negtive_index)
 
         local qTensor = qData.data_matrix:double()
         local dTensor = dData.data_matrix:double()
 
-        --print(qTensor:size())
-        --print(dTensor:size())
-        result = self.model:forward({qTensor, dTensor, all_index})
-        print(result)
-        error()
+        if i == 5 then
+            local alpha = self.model:forward({qTensor, dTensor, all_index})
+            print(alpha:size())
+        end
+
+
+        -- load the doc distance for NCE Training.
     end
 end
 

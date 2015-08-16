@@ -6,7 +6,7 @@ function BatchSample.init()
 -- allocate the space for each sample
     local self = {}
     setmetatable(self, BatchSample)
-
+    self.batch_size = nil
     self.pointer = 1
 
     self.add_pointer = function() self.pointer = self.pointer + 1 end
@@ -28,7 +28,7 @@ end
 
 function BatchSample:Load(Data, mstream, expectedBatchSize, index)
     -- load into 1D sequence vector.
-    local batch_size = expectedBatchSize
+    self.batch_size = expectedBatchSize
     local segsize = mstream[self.pointer]
     self.add_pointer()
 
@@ -38,7 +38,7 @@ function BatchSample:Load(Data, mstream, expectedBatchSize, index)
     --print(batch_size, segsize, elementsize)
     
 
-    for i = 1, batch_size do
+    for i = 1, self.batch_size do
         Data.sample_Idx_Mem[i] = mstream[self.pointer]
         self.add_pointer()
     end

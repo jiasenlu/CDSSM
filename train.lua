@@ -13,7 +13,7 @@ cmd:text('Train CDSSM model')
 
 cmd:text()
 cmd:option('-cublas', 1, '')
-cmd:option('-objective', 'NCE', '')
+cmd:option('-objective', 'MMI', 'Currently only working NCE and MMI')
 cmd:option('-loss_report', 1, '')
 cmd:option('-model_path', 'cdssm/model/cdssm', '')
 cmd:option('-log_file', 'cdssm/model/log.txt', '')
