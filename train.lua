@@ -1,7 +1,10 @@
 -- Parameter setting
+-- meet the 2GB out of memory again, it seems that the nested class structure 
+-- didn't fit luaJit well. Split the data from the function. 
 
 require 'torch'
 require 'nn'
+local tds = require 'tds'
 local DSSM_Train = require 'DSSM_Train'
 
 cmd = torch.CmdLine()
@@ -62,10 +65,12 @@ local qFileName = 'train.src.seq.fea.t7'
 local dFileName = 'train.tgt.seq.fea.t7'
 local nceProbDisFile = 'train.logpD.s75'
 
+-- the Data is the root Cdata place for storing the data.
+
 local dssm_train = DSSM_Train.init()
-dssm_train:LoadTrainData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
+local qData, dData = dssm_train:LoadTrainData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
 dssm_train:ModelInit_FromConfig(opt)
-dssm_train:Training()
+dssm_train:Training(qData, dData)
 --print(self.PairStream.qStream.Data.fea_Idx_Mem)
 
 --print(dssm_train)

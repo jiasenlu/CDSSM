@@ -17,7 +17,7 @@ function SequenceInputStream.init()
     self.batch_size = 0
     self.last_incomplete_batch_size = 0
     self.mstream = nil
-    self.Data = nil
+    self.dataFun = nil -- on the function, not inlcude the data
 
     self.sparse_flag = 0 -- initalized the sparse data or dense data.
 
@@ -37,45 +37,46 @@ function SequenceInputStream:get_dimension(data_dir, fileName, opt)
 
     assert(batch_size == opt.batch_size, "batch_size does not match bettwen configuration and input data!")
 
-    self.Data = BatchSample.init(batch_size, self.maxSequence_perBatch, self.maxElement_perBatch)
-
+    self.dataFun = BatchSample.init()
+    local Data = BatchSample:init_Data(batch_size, self.maxSequence_perBatch, self.maxElement_perBatch)
     self.batch_num = math.ceil(self.total_batch_size/batch_size)
     self.last_incomplete_batch_size = self.total_batch_size % batch_size
     self.batch_index = 1
 
+    return Data
 end
 
 function SequenceInputStream:init_batch()
     self.batch_index = 1 -- set the first batch
 end
 
-function SequenceInputStream:Fill(allowedFeatureDimension, opt)
+function SequenceInputStream:Fill(Data, allowedFeatureDimension, opt)
 
     if self.batch_index > self.batch_num then
-        return false
+        return false, Data
     end
 
-    self:LoadDataBatch(allowedFeatureDimension, opt)
+    Data = self:LoadDataBatch(Data, allowedFeatureDimension, opt)
     self.batch_index = self.batch_index+1
-    return true
+    return true, Data
 end
 
 
-function SequenceInputStream:LoadDataBatch(allowedFeatureDimension, opt)
+function SequenceInputStream:LoadDataBatch(Data, allowedFeatureDimension, opt)
     local expectedBatchSize = self.batch_size
     if self.batch_index == self.batch_num and self.last_incomplete_batch_size ~= 0 then
         expectedBatchSize = self.last_incomplete_batch_size
     end
     if self.feature_size <= allowedFeatureDimension then
 
-        self.Data:Load(self.mstream, expectedBatchSize, self.batch_index)
+        Data = self.dataFun:Load(Data, self.mstream, expectedBatchSize, self.batch_index)
     end
 
     if opt.data_format == 0 then
     -- if the input is dense.
-        self.Data:Sparse_to_Dense(expectedBatchSize, self.feature_size, opt)
+        Data = self.dataFun:Sparse_to_Dense(Data, expectedBatchSize, self.feature_size, opt)
     end
-
+    return Data
 end
 
 return SequenceInputStream

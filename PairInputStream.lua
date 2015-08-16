@@ -28,7 +28,7 @@ end
 
 function PairInputStream:Load_Train_PairData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
     
-    self:Load_PairData(data_dir, qFileName, dFileName, nceProbDisFile)
+    local qData, dData = self:Load_PairData(data_dir, qFileName, dFileName, nceProbDisFile)
 
     if opt.feature_dimension_query <= 0 or opt.feature_dimension_doc <= 0 then
         opt.feature_dimension_query = self.qStream.feature_size
@@ -38,15 +38,17 @@ function PairInputStream:Load_Train_PairData(data_dir, qFileName, dFileName, nce
     if opt.mirror_init == 1 then
         -- need to implement that.
     end
+
+    return qData, dData
 end
 
 
 function PairInputStream:Load_PairData(data_dir, qFileName, dFileName, nceProbDisFile)
     self.qStream = SequenceInputStream.init()
-    self.qStream:get_dimension(data_dir, qFileName, opt)
+    local qData = self.qStream:get_dimension(data_dir, qFileName, opt)
 
     self.dStream = SequenceInputStream.init()
-    self.dStream:get_dimension(data_dir, dFileName, opt)
+    local dData = self.dStream:get_dimension(data_dir, dFileName, opt)
 
     if nceProbDisFile ~= nil then
 
@@ -55,6 +57,7 @@ function PairInputStream:Load_PairData(data_dir, qFileName, dFileName, nceProbDi
     self.Doc_MaxSegment_batch = math.max(self.Doc_MaxSegment_batch, self.dStream.maxSequence_perBatch)
     self.maxSegment_batch = math.max(self.Query_MaxSegment_batch, self.Doc_MaxSegment_batch)
 
+    return qData, dData
 end
 
 function PairInputStream:InitFeatureNorm(srcNormalizer, tgtNormalizer)
@@ -69,10 +72,12 @@ function PairInputStream:Init_Batch()
 
 end
 
-function PairInputStream:Next_Batch(srcNorm, tgtNorm, opt)
+function PairInputStream:Next_Batch(qData, dData, srcNorm, tgtNorm, opt)
     -- get the next batch data.
-    if (not self.qStream:Fill(opt.feature_dimension_query, opt)) or (not self.dStream:Fill(opt.feature_dimension_doc, opt)) then
-        return false
+    local qFlag, qData = self.qStream:Fill(qData, opt.feature_dimension_query, opt)
+    local dFlag, dData = self.dStream:Fill(dData, opt.feature_dimension_doc, opt)
+    if (not qFlag) or (not dFlag) then
+        return false, qData, dData
     end
 
     if srcNorm ~= nil then
@@ -83,7 +88,7 @@ function PairInputStream:Next_Batch(srcNorm, tgtNorm, opt)
         --tgtNorm.ProcessBatch()
     end
 
-    return true
+    return true, qData, dData
 end
 
 return PairInputStream
