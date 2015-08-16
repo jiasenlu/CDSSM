@@ -32,7 +32,7 @@ function PairInputStream:Load_Train_PairData(data_dir, qFileName, dFileName, nce
 
     if opt.feature_dimension_query <= 0 or opt.feature_dimension_doc <= 0 then
         opt.feature_dimension_query = self.qStream.feature_size
-        opt.feature_dimension_doc = self.qStream.feature_size
+        opt.feature_dimension_doc = self.dStream.feature_size
     end
 
     if opt.mirror_init == 1 then
@@ -71,12 +71,19 @@ end
 
 function PairInputStream:Next_Batch(srcNorm, tgtNorm, opt)
     -- get the next batch data.
-    if (not self.qStream:Fill(opt.feature_dimension_query)) or (not self.dStream:Fill(opt.feature_dimension_doc)) then
+    if (not self.qStream:Fill(opt.feature_dimension_query, opt)) or (not self.dStream:Fill(opt.feature_dimension_doc, opt)) then
         return false
     end
 
+    if srcNorm ~= nil then
+        --srcNorm.ProcessBatch()
+    end
 
+    if tgtNorm ~= nil then
+        --tgtNorm.ProcessBatch()
+    end
 
-
+    return true
 end
+
 return PairInputStream

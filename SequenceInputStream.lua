@@ -41,7 +41,7 @@ function SequenceInputStream:get_dimension(data_dir, fileName, opt)
 
     self.batch_num = math.ceil(self.total_batch_size/batch_size)
     self.last_incomplete_batch_size = self.total_batch_size % batch_size
-    self.batch_index = 0
+    self.batch_index = 1
 
 end
 
@@ -49,27 +49,32 @@ function SequenceInputStream:init_batch()
     self.batch_index = 1 -- set the first batch
 end
 
-function SequenceInputStream:Fill(allowedFeatureDimension)
-    
-    if self.batch_index == self.batch_num then
+function SequenceInputStream:Fill(allowedFeatureDimension, opt)
+
+    if self.batch_index > self.batch_num then
         return false
     end
-    self:LoadDataBatch(allowedFeatureDimension)
+
+    self:LoadDataBatch(allowedFeatureDimension, opt)
     self.batch_index = self.batch_index+1
     return true
 end
 
 
-function SequenceInputStream:LoadDataBatch(allowedFeatureDimension)
+function SequenceInputStream:LoadDataBatch(allowedFeatureDimension, opt)
     local expectedBatchSize = self.batch_size
-    if self.batch_index == (self.batch_num-1) and self.last_incomplete_batch_size ~= 0 then
+    if self.batch_index == self.batch_num and self.last_incomplete_batch_size ~= 0 then
         expectedBatchSize = self.last_incomplete_batch_size
     end
     if self.feature_size <= allowedFeatureDimension then
-        self.Data:Load(self.mstream, expectedBatchSize)
+
+        self.Data:Load(self.mstream, expectedBatchSize, self.batch_index)
     end
 
-
+    if opt.data_format == 0 then
+    -- if the input is dense.
+        self.Data:Sparse_to_Dense(expectedBatchSize, self.feature_size, opt)
+    end
 
 end
 

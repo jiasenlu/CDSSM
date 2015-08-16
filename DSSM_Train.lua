@@ -94,8 +94,10 @@ end
 function DSSM_Train:Training()
     self.PairStream:Init_Batch()
     local trainingLoss = 0
+    while self.PairStream:Next_Batch(SrcNorm, TgtNorm, opt) do
+        -- doing the forward process
+        --self.model:forward()
 
-    self.PairStream:Next_Batch(SrcNorm, TgtNorm, opt)
-
+    end
 end
 return DSSM_Train

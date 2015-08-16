@@ -106,10 +106,11 @@ function WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
     local batch = Batch.init()
 
     local f = assert(io.open(inFile, "r"))
-    for line in f:lines() do 
+    for line in f:lines() do
+
         nLine = nLine + 1
         local rgWfs = utils.String2Matrix(line)
-        
+
         if batch.BatchSize == BatchSize then
             -- currently store the batch as torch.cat between the torch tensor (better solution?)
             -- havn't test the efficiency of torch.cat.
@@ -133,8 +134,6 @@ function WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
         if batch.SegSize > nMaxSegmentSize then
             nMaxSegmentSize = batch.SegSize
         end
-
-
     end
 
     if batch.BatchSize > 0 then
@@ -158,7 +157,7 @@ function WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
     last_tensor[5] = BatchSize
 
     tensor = torch.cat(tensor, last_tensor)
-
+    print(tensor[1], tensor[2], tensor[3], tensor[4], tensor[5])
     -- save to torch.t7
     print('saving ' .. outFile)
     torch.save(outFile, tensor)

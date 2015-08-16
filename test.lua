@@ -19,13 +19,13 @@ local inFile = 'data/train.src.seq.fea'
 local BatchSize = 1024
 local outFile = 'data/train.src.seq.fea.t7'
 
---WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
+WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
 
 local inFile = 'data/train.tgt.seq.fea'
 local BatchSize = 1024
 local outFile = 'data/train.tgt.seq.fea.t7'
 
---WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
+WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
 
 --local inFile = 'data/train.pair.tok.tsv'
 --local outfile = 'data/train.logpD.s75'
@@ -34,6 +34,6 @@ local outFile = 'data/train.tgt.seq.fea.t7'
 
 local data_dir = 'data'
 local fileName = 'train.src.seq.fea.t7'
-local qStream = SequenceInputStream.init()
+--local qStream = SequenceInputStream.init()
 --print(qStream.total_batch_size)
-qStream:get_dimension(data_dir, fileName)
+--qStream:get_dimension(data_dir, fileName)

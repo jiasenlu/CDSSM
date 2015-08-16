@@ -41,6 +41,8 @@ cmd:option('-feature_dimension_query', 0, '')
 
 cmd:option('-feature_dimension_doc', 0, '')
 
+cmd:option('-data_format', 0, '0=dense, 1=sparse')
+cmd:option('-word_len', 20, '')
 cmd:option('-mirror_init', 0, '')
 cmd:option('-device', 'gpu', '')
 cmd:option('-reject_rate', 1, '')
@@ -51,7 +53,6 @@ cmd:text()
 opt = cmd:parse(arg)
 
 if opt.objective == 'NCE' then
-
 
 end
 
@@ -64,7 +65,6 @@ local dssm_train = DSSM_Train.init()
 dssm_train:LoadTrainData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
 dssm_train:ModelInit_FromConfig(opt)
 dssm_train:Training()
-
 --print(self.PairStream.qStream.Data.fea_Idx_Mem)
 
 --print(dssm_train)
