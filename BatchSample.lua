@@ -84,7 +84,7 @@ function BatchSample:Sparse_to_Dense(expectedBatchSize, feature_size, opt)
     local win_size = 3
     local seg_len = opt.word_len  -- we need to fix the seg_len here, the last dim is bow encodding.
     -- initialize the tensor.
-    local data_matrix = torch.ByteTensor(expectedBatchSize, seg_len, feature_size)
+    local data_matrix = torch.IntTensor(expectedBatchSize, seg_len, feature_size)
     local zero_matrix = torch.IntTensor(1):zero()
     self.sample_Idx_Mem = torch.cat(zero_matrix, self.sample_Idx_Mem)
     self.seg_Idx_Mem = torch.cat(zero_matrix, self.seg_Idx_Mem)

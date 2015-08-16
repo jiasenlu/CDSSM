@@ -65,16 +65,16 @@ function DSSM_Train:ModelInit_FromConfig(opt)
     local Q_1_layer = nn.TemporalConvolution(Q_feature_size * wind_size, 1000, 1)()
     local Q_1_link = nn.Tanh()(Q_1_layer)
     -- then a max pooling layer
-    local Q_1_pool = nn.TemporalMaxPooling(20)(Q_1_link)
+    local Q_1_pool = nn.TemporalMaxPooling(18)(Q_1_link)
     local Q_1_reshape = nn.Reshape(batch_size, 1000)(Q_1_pool)
     -- second layer
     local Q_2_layer = nn.Linear(1000, 300)(Q_1_reshape)
     local Q_2_link = nn.Tanh()(Q_2_layer)
 
-    local D_1_layer = nn.TemporalConvolution(Q_feature_size * wind_size, 1000, 1)()
+    local D_1_layer = nn.TemporalConvolution(D_feature_size * wind_size, 1000, 1)()
     local D_1_link = nn.Tanh()(D_1_layer)
     -- then a max pooling layer
-    local D_1_pool = nn.TemporalMaxPooling(20)(D_1_link)
+    local D_1_pool = nn.TemporalMaxPooling(18)(D_1_link)
     local D_1_reshape = nn.Reshape(batch_size, 1000)(D_1_pool)
     -- second layer
     local D_2_layer = nn.Linear(1000, 300)(D_1_reshape)
@@ -96,8 +96,29 @@ function DSSM_Train:Training()
     local trainingLoss = 0
     while self.PairStream:Next_Batch(SrcNorm, TgtNorm, opt) do
         -- doing the forward process
-        --self.model:forward()
+        
+        -- negtive samping index
+        local postive_index = torch.range(1,1024):type('torch.LongTensor')
+        local negtive_index = self:Negative_Sampling(opt.batch_size, opt)
+        local all_index = torch.cat(postive_index, negtive_index)
 
+        qTensor = self.PairStream.qStream.Data.data_matrix:double()
+        dTensor = self.PairStream.dStream.Data.data_matrix:double()
+
+        result = self.model:forward({qTensor, dTensor, all_index})
     end
+end
+
+function DSSM_Train:Negative_Sampling(batch_size, opt)
+    local negtive_array = torch.IntTensor(batch_size*opt.ntrial)
+    for i = 1, opt.ntrial do
+
+        local randpos = torch.random(0.8*batch_size) + math.floor(0.1 * batch_size)
+        for k = 1, batch_size do
+            local bs = (randpos + k) % batch_size + 1
+            negtive_array[(i-1)*batch_size + k] = bs
+        end
+    end
+    return negtive_array:type('torch.LongTensor')
 end
 return DSSM_Train
