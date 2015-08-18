@@ -31,9 +31,11 @@ function DSSM_MMI_Criterion:updateOutput(input)
     local alpha = Calculate_Alpha.calCosDist({Q_input, D_input, self.Q_sampling_array, self.D_sampling_array})
     -- 2: calculate the alpha
     alpha = Calculate_Alpha.cal_alpha(alpha, self.nTrail, self.batch_size, self.gamma)
-    alpha = Calculate_Alpha.calculate_alpha_sum(alpha, self.nTrail, self.batch_size, self.gamma,1)
+    alpha = Calculate_Alpha.cal_alpha_sum(alpha, self.nTrail, self.batch_size, self.gamma,1)
+    alpha = Calculate_Alpha.cal_alpha_norm(alpha, self.nTrail, self.batch_size, self.gamma)
+    alpha = Calculate_Alpha.cal_alpha_sum(alpha, self.nTrail, self.batch_size, self.gamma,0)
     -- 3: calculate the loss
-
+    print(alpha:sub(1,10))
     return alpha
 
 end

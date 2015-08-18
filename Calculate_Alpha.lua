@@ -63,7 +63,32 @@ function Calculate_Alpha.cal_alpha(alpha, nTrial, batchsize, gamma)
 end
 
 function Calculate_Alpha.cal_alpha_sum(alpha, nTrial, batchsize, gamma, init)
+    -- alpha[postive] = init + alpha[postive + negative]
+    local pos_alpha = alpha:sub(1,batchsize)
+    local neg_alpha = alpha:sub(batchsize+1, -1)    
+    local neg_alpha_split = neg_alpha:split(batchsize, 1)
+    for i = 1, nTrial do
+      pos_alpha:add(neg_alpha_split[i], init)
+    end
 
+    local new_alpha = torch.cat(pos_alpha, neg_alpha)
+    return new_alpha
+end
+
+function Calculate_Alpha.cal_alpha_norm(alpha, nTrial, batchsize, gamma)
+    -- alpha[negative] = gamma * alpha[negative]./ alpha[positive]
+    local pos_alpha = alpha:sub(1,batchsize)
+    local neg_alpha = alpha:sub(batchsize+1, -1)
+    local positive_array = torch.range(1,batchsize):type('torch.IntTensor')  
+    positive_array = positive_array:repeatTensor(nTrial) -- replicate the nTrail times
+    positive_array = positive_array:type('torch.LongTensor')
+    local pos_alpha_replicate = pos_alpha:index(1,positive_array)
+
+    neg_alpha = torch.cdiv(neg_alpha, pos_alpha_replicate)
+    neg_alpha = gamma * neg_alpha
+    local new_alpha = torch.cat(pos_alpha, neg_alpha)
+
+    return new_alpha
 
 end
 return Calculate_Alpha

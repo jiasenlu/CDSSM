@@ -119,7 +119,6 @@ function DSSM_Train:Training(qData, dData, opt)
 
         -- forward the criterion
         local alpha = self.criterion:updateOutput(output)
-        print(alpha)
         error()
     end
 end
