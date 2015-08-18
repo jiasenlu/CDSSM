@@ -24,7 +24,7 @@ cmd:option('-batch_size', 1024, '')
 cmd:option('-ntrial', 50, '')
 cmd:option('-neg_static_sample', 0, '')
 cmd:option('-max_iter', 500, '')
-cmd:option('-parm_gamma', 25, '')
+cmd:option('-gamma', 25, '')
 cmd:option('-train_test_rate', 1, '')
 cmd:option('-learning_rate', 0.02, '')
 

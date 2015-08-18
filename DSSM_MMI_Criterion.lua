@@ -2,8 +2,11 @@ local DSSM_MMI_Criterion, parent = torch.class('nn.DSSM_MMI_Criterion', 'nn.Crit
 
 local Calculate_Alpha = require 'Calculate_Alpha'
 
-function DSSM_MMI_Criterion:__init(batch_size, nTrail)
+function DSSM_MMI_Criterion:__init(batch_size, nTrail, gamma)
     parent.__init(self)
+    self.batch_size = batch_size
+    self.nTrail = nTrail
+    self.gamma = gamma
     -- do negative sampling
     local negtive_array = torch.IntTensor(batch_size * nTrail)
 
@@ -27,8 +30,10 @@ function DSSM_MMI_Criterion:updateOutput(input)
     -- 1: calculate the cosine distance for positive and negtive array
     local alpha = Calculate_Alpha.calCosDist({Q_input, D_input, self.Q_sampling_array, self.D_sampling_array})
     -- 2: calculate the alpha
-    
+    alpha = Calculate_Alpha.cal_alpha(alpha, self.nTrail, self.batch_size, self.gamma)
+    alpha = Calculate_Alpha.calculate_alpha_sum(alpha, self.nTrail, self.batch_size, self.gamma,1)
     -- 3: calculate the loss
+
     return alpha
 
 end

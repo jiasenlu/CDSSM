@@ -113,7 +113,7 @@ function DSSM_Train:Training(qData, dData, opt)
         end
 
         if opt.objective == 'MMI' then
-            self.criterion = nn.DSSM_MMI_Criterion(batch_size, opt.ntrial)
+            self.criterion = nn.DSSM_MMI_Criterion(batch_size, opt.ntrial, opt.gamma)
         end
 
 
