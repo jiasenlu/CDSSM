@@ -44,7 +44,6 @@ function DSSM_MMI_Criterion:updateOutput(input)
 
 end
 
-
 function DSSM_MMI_Criterion:updateGradInput(input)
 
 
