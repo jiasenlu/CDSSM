@@ -35,11 +35,12 @@ function DSSM_MMI_Criterion:updateOutput(input)
     alpha = Calculate_Alpha.cal_alpha_norm(alpha, self.nTrail, self.batch_size, self.gamma)
     alpha = Calculate_Alpha.cal_alpha_sum(alpha, self.nTrail, self.batch_size, self.gamma,0)
     -- 3: calculate the loss
-
-
-
-
-    return alpha
+    local err = 0
+    local eps = 1.4e-45
+    for i = 1, self.batch_size do
+        err = err + math.log(math.max(eps, (1+alpha[i] / math.max(self.gamma - alpha[i], eps))))
+    end
+    return err
 
 end
 
