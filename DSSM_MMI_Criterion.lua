@@ -27,7 +27,7 @@ function DSSM_MMI_Criterion:updateOutput(input)
     -- 1: calculate the cosine distance for positive and negtive array
     local alpha = Calculate_Alpha.calCosDist({Q_input, D_input, self.Q_sampling_array, self.D_sampling_array})
     -- 2: calculate the alpha
-
+    
     -- 3: calculate the loss
     return alpha
 
