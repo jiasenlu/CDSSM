@@ -56,7 +56,7 @@ function Calculate_Alpha.cal_alpha(alpha, nTrial, batchsize, gamma)
     local pos_alpha_replicate = pos_alpha:index(1,positive_array)
 
     neg_alpha = torch.add(pos_alpha_replicate, - neg_alpha) 
-    neg_alpha = torch.exp(neg_alpha * gamma)
+    neg_alpha = torch.exp(torch.mul(neg_alpha, gamma))
     
     local new_alpha = torch.cat(pos_alpha, neg_alpha)
     return new_alpha
@@ -85,7 +85,7 @@ function Calculate_Alpha.cal_alpha_norm(alpha, nTrial, batchsize, gamma)
     local pos_alpha_replicate = pos_alpha:index(1,positive_array)
 
     neg_alpha = torch.cdiv(neg_alpha, pos_alpha_replicate)
-    neg_alpha = gamma * neg_alpha
+    neg_alpha = torch.mul(neg_alpha, gamma)
     local new_alpha = torch.cat(pos_alpha, neg_alpha)
 
     return new_alpha
