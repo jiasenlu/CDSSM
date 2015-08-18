@@ -4,8 +4,7 @@ local Normalizer = require 'Normalizer'
 local tds = require 'tds'
 require 'nngraph'
 require 'nn'
-require 'DSSM_CosineDist'
-
+require 'DSSM_MMI_Criterion'
 local DSSM_Train = {}
 DSSM_Train.__index = DSSM_Train
 
@@ -60,8 +59,8 @@ function DSSM_Train:ModelInit_FromConfig(opt)
     -- input is feature_size * window_size, filter is the same size. if we use the 
     -- 3D tensor, then the [dw] == 1
 
+    -- Using gModule to construct the network
     -- 3D initilzation is saving the memory than 2D initilzation
-    local Index_layer = nn.Identity()()
     local Q_1_layer = nn.TemporalConvolution(Q_feature_size * wind_size, 1000, 1)()
     local Q_1_link = nn.Tanh()(Q_1_layer)
     -- then a max pooling layer
@@ -80,18 +79,15 @@ function DSSM_Train:ModelInit_FromConfig(opt)
     local D_2_layer = nn.Linear(1000, 300)(D_1_reshape)
     local D_2_link = nn.Tanh()(D_2_layer)
 
-    local Cos_layer = nn.DSSM_CosineDist()({Q_2_link, D_2_link, Index_layer})
-
-    -- add another layer update the 
-    local model = nn.gModule({Q_1_layer, D_1_layer, Index_layer}, {Cos_layer})
+    local model = nn.gModule({Q_1_layer, D_1_layer}, {Q_2_link, D_2_link})
 
     -- get the non-sparse query, document and index
-
     self.model = model
+
 
 end
 
-function DSSM_Train:Training(qData, dData)
+function DSSM_Train:Training(qData, dData, opt)
     self.PairStream:Init_Batch()
     local trainingLoss = 0
 
@@ -101,34 +97,31 @@ function DSSM_Train:Training(qData, dData)
         
         -- negtive samping index
         local batch_size = self.PairStream.qStream.dataFun.batch_size
-        print(batch_size)
-        local postive_index = torch.range(1,batch_size):type('torch.LongTensor')
-        local negtive_index = self:Negative_Sampling(batch_size, opt)
-        local all_index = torch.cat(postive_index, negtive_index)
 
         local qTensor = qData.data_matrix:double()
         local dTensor = dData.data_matrix:double()
 
-        if i == 5 then
-            local alpha = self.model:forward({qTensor, dTensor, all_index})
-            print(alpha:size())
-        end
+        -- get the cosine similarity for all positive and negtive.
+        local output = self.model:forward({qTensor, dTensor})
+        
+        -- initialize the criterion function here, in order we can intilized the negative sampling 
+        -- differently for each batch
 
-
+        if opt.objective == 'NCE' then
         -- load the doc distance for NCE Training.
-    end
-end
 
-function DSSM_Train:Negative_Sampling(batch_size, opt)
-    local negtive_array = torch.IntTensor(batch_size*opt.ntrial)
-    for i = 1, opt.ntrial do
-
-        local randpos = torch.random(0.8*batch_size) + math.floor(0.1 * batch_size)
-        for k = 1, batch_size do
-            local bs = (randpos + k) % batch_size + 1
-            negtive_array[(i-1)*batch_size + k] = bs
         end
+
+        if opt.objective == 'MMI' then
+            self.criterion = nn.DSSM_MMI_Criterion(batch_size, opt.ntrial)
+        end
+
+
+        -- forward the criterion
+        local alpha = self.criterion:updateOutput(output)
+        print(alpha)
+        error()
     end
-    return negtive_array:type('torch.LongTensor')
 end
+
 return DSSM_Train
