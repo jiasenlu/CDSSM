@@ -27,6 +27,8 @@ cmd:option('-max_iter', 500, '')
 cmd:option('-gamma', 25, '')
 cmd:option('-train_test_rate', 1, '')
 cmd:option('-learning_rate', 0.02, '')
+cmd:option('-weight_decay',1e-3,'')
+cmd:option('-momentum',0,'')
 
 cmd:option('-source_layer_dim', '1000 - 300', '')
 cmd:option('-source_layer_sigma', '0.1 - 0.1', '')

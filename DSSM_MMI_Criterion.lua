@@ -26,11 +26,11 @@ end
 function DSSM_MMI_Criterion:updateOutput(input)
     
     local Q_input, D_input = input[1],input[2]
-    local dimension = Q_input:size()[2]
+    self.dimension = Q_input:size()[2]
 
     self.alpha_buffer = torch.Tensor(self.batch_size * (self.nTrail+1)):zero()
-    self.Q_derivative_buffer = torch.Tensor(self.nTrail+1, self.batch_size, dimension):zero()
-    self.D_derivative_buffer = torch.Tensor(self.nTrail+1, self.batch_size, dimension):zero()
+    self.Q_derivative_buffer = torch.Tensor(self.nTrail+1, self.batch_size, self.dimension):zero()
+    self.D_derivative_buffer = torch.Tensor(self.nTrail+1, self.batch_size, self.dimension):zero()
 
     -- 1: calculate the cosine distance for positive and negtive array
     local CosDist = nn.CosineDistance()
@@ -61,24 +61,42 @@ function DSSM_MMI_Criterion:updateOutput(input)
     self.alpha_buffer = Calculate_Alpha.cal_alpha(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma)
     self.alpha_buffer = Calculate_Alpha.cal_alpha_sum(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma,1)
     self.alpha_buffer = Calculate_Alpha.cal_alpha_norm(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma)
-    self.alpha_buffer = Calculate_Alpha.cal_alpha_sum(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma,0)
+    
+    self.alpha_buffer_loss = Calculate_Alpha.cal_alpha_sum(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma,0)
+    
+    -- calculate the derivative
+    self.Q_derivative_buffer = Calculate_Alpha.cal_derivative(self.Q_derivative_buffer)
+    self.D_derivative_buffer = Calculate_Alpha.cal_derivative(self.D_derivative_buffer)
+    
     -- 3: calculate the loss
     local err = 0
     local eps = 1.4e-45
     for i = 1, self.batch_size do
-        err = err + math.log(math.max(eps, (1+self.alpha_buffer[i] / math.max(self.gamma - self.alpha_buffer[i], eps))))
+        err = err + math.log(math.max(eps, (1+self.alpha_buffer_loss[i] / math.max(self.gamma - self.alpha_buffer_loss[i], eps))))
     end
     return err
 
 end
 
-function DSSM_MMI_Criterion:updateGradInput(input)
+function DSSM_MMI_Criterion:updateGradInput()
     -- here, we didn't use the fomula in the paper, we jsut
     -- j is the number of negative sampling
     -- gradInput = Sum_j[alpha_buffer[j] + (delta_postivePair - delta_negtivePair)]
+    local gw1 = torch.Tensor(self.batch_size, self.dimension):zero()
+    local gw2 = torch.Tensor(self.batch_size, self.dimension):zero()
+    for i = 1, self.nTrail do
+        local alpha_tmp = self.alpha_buffer:sub(i*self.batch_size+1, (i+1)*self.batch_size)
+        local Q_deriv_tmp = self.Q_derivative_buffer:select(1,i+1)
+        local D_deriv_tmp = self.D_derivative_buffer:select(1,i+1)
+        alpha_tmp = alpha_tmp:view(self.batch_size, -1)
+        alpha_tmp = alpha_tmp:expandAs(Q_deriv_tmp)
+        gw1:addcmul(alpha_tmp, Q_deriv_tmp)
+        gw2:addcmul(alpha_tmp, D_deriv_tmp)
+    end
 
+    self.gradInput[1] = gw1:sum(1):div(self.batch_size)
+    self.gradInput[2] = gw2:sum(1):div(self.batch_size)
 
-
-
+    return self.gradInput
 
 end

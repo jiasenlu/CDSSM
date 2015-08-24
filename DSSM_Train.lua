@@ -5,6 +5,7 @@ local tds = require 'tds'
 require 'nngraph'
 require 'nn'
 require 'DSSM_MMI_Criterion'
+require 'optim'
 local DSSM_Train = {}
 DSSM_Train.__index = DSSM_Train
 
@@ -50,7 +51,7 @@ function DSSM_Train:ModelInit_FromConfig(opt)
 
 
     -- we first try to build fix structure model
-
+    print('Initializing the Model...')
     local Q_feature_size = self.PairStream.qStream.feature_size
     local D_feature_size = self.PairStream.dStream.feature_size
 
@@ -83,8 +84,15 @@ function DSSM_Train:ModelInit_FromConfig(opt)
 
     -- get the non-sparse query, document and index
     self.model = model
+    parameters,gradParameters = self.model:getParameters()
 
-
+    self.optimState = {
+      learningRate = opt.learning_rate,
+      weightDecay = opt.weight_decay,
+      momentum = opt.momentum,
+      learningRateDecay = 1e-7
+    }
+    self.optimMethod = optim.sgd
 end
 
 function DSSM_Train:Training(qData, dData, opt)
@@ -92,6 +100,7 @@ function DSSM_Train:Training(qData, dData, opt)
     local trainingLoss = 0
 
     for i = 1,self.PairStream.qStream.batch_num do
+        --xlua.progress(i, self.PairStream.qStream.batch_num)
         local flag, qData, dData = self.PairStream:Next_Batch(qData, dData, srcNorm, tgtNorm, opt)
         -- doing the forward process
         
@@ -101,25 +110,37 @@ function DSSM_Train:Training(qData, dData, opt)
         local qTensor = qData.data_matrix:double()
         local dTensor = dData.data_matrix:double()
 
-        -- get the cosine similarity for all positive and negtive.
-        local output = self.model:forward({qTensor, dTensor})
-        
-        -- initialize the criterion function here, in order we can intilized the negative sampling 
-        -- differently for each batch
 
-        if opt.objective == 'NCE' then
-        -- load the doc distance for NCE Training.
+        local feval = function(x)
+                if x ~= parameters then
+                    parameters:copy(x)
+                end
+                gradParameters:zero()
+                -- get the cosine similarity for all positive and negtive.
+                local output = self.model:forward({qTensor, dTensor})
+                
+                -- initialize the criterion function here, in order we can intilized the negative sampling 
+                -- differently for each batch
 
-        end
+                if opt.objective == 'NCE' then
+                -- load the doc distance for NCE Training.
 
-        if opt.objective == 'MMI' then
-            self.criterion = nn.DSSM_MMI_Criterion(batch_size, opt.ntrial, opt.gamma)
-        end
+                end
+
+                if opt.objective == 'MMI' then
+                    self.criterion = nn.DSSM_MMI_Criterion(batch_size, opt.ntrial, opt.gamma)
+                end
 
 
-        -- forward the criterion
-        local err = self.criterion:updateOutput(output)
-        print(err)
+                -- forward the criterion
+                local err = self.criterion:updateOutput(output)
+                print(err)
+                local do_df = self.criterion:updateGradInput()
+                self.model:backward({qTensor, dTensor}, do_df)
+
+                return err, gradParameters
+            end
+            self.optimMethod(feval, parameters, self.optimState)
     end
 end
 

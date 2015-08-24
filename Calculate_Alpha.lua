@@ -2,44 +2,6 @@
 local Calculate_Alpha = {}
 Calculate_Alpha.__index = Calculate_Alpha
 
-function Calculate_Alpha.calCosDist(input)
-    local input1, input2 = input[1], input[2]
-    local self = {}
-    if input1:dim() == 1 then
-        input1 = input1:view(1,-1)
-        input2 = input2:view(1,-1)
-    end
-
-    if not self.buffer then
-        self.buffer = input1.new()
-        self.w1 = input1.new()
-        self.w22 = input1.new()
-        self.w = input1.new()
-        self.w32 = input1.new()
-        self.ones = input1.new()
-    end
-
-   self.buffer:cmul(input1,input2)
-   self.w1:sum(self.buffer,2)
-
-   local epsilon = 1e-12
-   self.buffer:cmul(input1,input1)
-   self.w22:sum(self.buffer,2):add(epsilon)
-   self.ones:resizeAs(self.w22):fill(1)
-   self.w22:cdiv(self.ones, self.w22)
-   self.w:resizeAs(self.w22):copy(self.w22)
-
-   self.buffer:cmul(input2,input2)
-   self.w32:sum(self.buffer,2):add(epsilon)
-   self.w32:cdiv(self.ones, self.w32)
-   self.w:cmul(self.w32)
-   self.w:sqrt()
-
-   local output = torch.cmul(self.w1,self.w)
-   output = output:select(2,1)
-
-   return output
-end
 
 function Calculate_Alpha.cal_alpha(alpha, nTrial, batchsize, gamma)
     -- alpha[negtive] = exp(-gamma * (alpha[positive] - alpha[negative])
@@ -85,6 +47,15 @@ function Calculate_Alpha.cal_alpha_norm(alpha, nTrial, batchsize, gamma)
     local new_alpha = torch.cat(pos_alpha, neg_alpha)
 
     return new_alpha
+end
+
+function Calculate_Alpha.cal_derivative(derivative)
+    local pos_derivative = derivative:sub(1,1)
+    pos_derivative = pos_derivative:expandAs(derivative)
+    derivative = -derivative
+    derivative:add(pos_derivative)
+
+    return derivative
 
 end
 return Calculate_Alpha
