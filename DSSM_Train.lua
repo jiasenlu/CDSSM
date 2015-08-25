@@ -141,6 +141,9 @@ function DSSM_Train:Training(qData, dData, opt)
             end
             self.optimMethod(feval, parameters, self.optimState)
     end
+    -- reset pointer in BatchSample.
+    self.PairStream.qStream.dataFun.pointer = 1
+    self.PairStream.dStream.dataFun.pointer = 1
 end
 
 return DSSM_Train

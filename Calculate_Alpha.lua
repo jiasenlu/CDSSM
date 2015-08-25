@@ -5,13 +5,10 @@ Calculate_Alpha.__index = Calculate_Alpha
 
 function Calculate_Alpha.cal_alpha(alpha, nTrial, batchsize, gamma)
     -- alpha[negtive] = exp(-gamma * (alpha[positive] - alpha[negative])
-    local positive_array = torch.range(1,batchsize):type('torch.IntTensor')  
     local pos_alpha = alpha:sub(1,batchsize)
     local neg_alpha = alpha:sub(batchsize+1, -1)
-    positive_array = positive_array:repeatTensor(nTrial) -- replicate the nTrail times
-    positive_array = positive_array:type('torch.LongTensor')
 
-    local pos_alpha_replicate = pos_alpha:index(1,positive_array)
+    local pos_alpha_replicate = pos_alpha:repeatTensor(nTrial)
 
     neg_alpha = torch.add(pos_alpha_replicate, - neg_alpha) 
     neg_alpha = torch.exp(torch.mul(neg_alpha, gamma))
@@ -22,7 +19,7 @@ end
 
 function Calculate_Alpha.cal_alpha_sum(alpha, nTrial, batchsize, gamma, init)
     -- alpha[postive] = init + alpha[postive + negative] (sum of all the (pos - negtive))
-    local pos_alpha = alpha:sub(1,batchsize)
+    local pos_alpha = alpha:sub(1,batchsize):zero()
     local neg_alpha = alpha:sub(batchsize+1, -1)    
     local neg_alpha_split = neg_alpha:split(batchsize, 1)
     for i = 1, nTrial do
@@ -49,13 +46,6 @@ function Calculate_Alpha.cal_alpha_norm(alpha, nTrial, batchsize, gamma)
     return new_alpha
 end
 
-function Calculate_Alpha.cal_derivative(derivative)
-    local pos_derivative = derivative:sub(1,1)
-    pos_derivative = pos_derivative:expandAs(derivative)
-    derivative = -derivative
-    derivative:add(pos_derivative)
-
-    return derivative
-
+function Calculate_Alpha.cal_gw(gw, nTrial)
 end
 return Calculate_Alpha

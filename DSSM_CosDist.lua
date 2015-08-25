@@ -77,8 +77,8 @@ function DSSM_CosDist:Backward(input, gradOutput)
    gw2:cmul(go)
 
    self.gradInput = {torch.Tensor, torch.Tensor}
-    self.gradInput[1] = gw1
-    self.gradInput[2] = gw2
+   self.gradInput[1] = gw1
+   self.gradInput[2] = gw2
 
 
    -- fix for torch bug 
