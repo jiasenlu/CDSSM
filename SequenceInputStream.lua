@@ -63,6 +63,7 @@ end
 
 
 function SequenceInputStream:LoadDataBatch(Data, allowedFeatureDimension, opt)
+    print('Perform Sparse to Dense transform...')
     local expectedBatchSize = self.batch_size
     if self.batch_index == self.batch_num and self.last_incomplete_batch_size ~= 0 then
         expectedBatchSize = self.last_incomplete_batch_size

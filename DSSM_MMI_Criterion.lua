@@ -1,6 +1,7 @@
 local DSSM_MMI_Criterion, parent = torch.class('nn.DSSM_MMI_Criterion', 'nn.Criterion')
 
 local Calculate_Alpha = require 'Calculate_Alpha'
+local DSSM_CosDist = require 'DSSM_CosDist'
 
 function DSSM_MMI_Criterion:__init(batch_size, nTrail, gamma)
     parent.__init(self)
@@ -33,15 +34,17 @@ function DSSM_MMI_Criterion:updateOutput(input)
     self.D_derivative_buffer = torch.Tensor(self.nTrail+1, self.batch_size, self.dimension):zero()
 
     -- 1: calculate the cosine distance for positive and negtive array
-    local CosDist = nn.CosineDistance()
+    local CosDist = DSSM_CosDist.init()
 
-    self.alpha_buffer:sub(1, self.batch_size):copy(CosDist:forward({Q_input, D_input}))
-    local tmp_derivative = CosDist:backward({Q_input, D_input}, torch.Tensor(self.batch_size):fill(1))
+    self.alpha_buffer:sub(1, self.batch_size):copy(CosDist:Forward({Q_input, D_input}))
+    local tmp_derivative = CosDist:Backward({Q_input, D_input}, torch.Tensor(self.batch_size):fill(1))
     self.Q_derivative_buffer:sub(1,1):copy(tmp_derivative[1])
     self.D_derivative_buffer:sub(1,1):copy(tmp_derivative[2])
 
     -- for negtive sampling
     for i = 1,self.nTrail do
+        CosDist:reset()
+
         -- shuffle the input index based on negative sampling.
         local D_input_neg = torch.Tensor(D_input:size()):zero()
 
@@ -50,9 +53,9 @@ function DSSM_MMI_Criterion:updateOutput(input)
             D_input_neg:select(1,j):copy(D_input:select(1,self.D_negtive_array[(i-1)*self.batch_size + j]))
         end 
 
-        self.alpha_buffer:sub(i * self.batch_size+1, (i+1)*self.batch_size):copy(CosDist:forward({Q_input, D_input_neg}))
+        self.alpha_buffer:sub(i * self.batch_size+1, (i+1)*self.batch_size):copy(CosDist:Forward({Q_input, D_input_neg}))
         
-        local tmp_derivative = CosDist:backward({Q_input, D_input_neg}, torch.Tensor(self.batch_size):fill(1))
+        local tmp_derivative = CosDist:Backward({Q_input, D_input_neg}, torch.Tensor(self.batch_size):fill(1))
         self.Q_derivative_buffer:sub(i+1,i+1):copy(tmp_derivative[1])
         self.D_derivative_buffer:sub(i+1,i+1):copy(tmp_derivative[2])
     end
@@ -74,7 +77,7 @@ function DSSM_MMI_Criterion:updateOutput(input)
     for i = 1, self.batch_size do
         err = err + math.log(math.max(eps, (1+self.alpha_buffer_loss[i] / math.max(self.gamma - self.alpha_buffer_loss[i], eps))))
     end
-    return err
+    return err / self.batch_size
 
 end
 

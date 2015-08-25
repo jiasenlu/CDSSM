@@ -26,7 +26,7 @@ cmd:option('-neg_static_sample', 0, '')
 cmd:option('-max_iter', 500, '')
 cmd:option('-gamma', 25, '')
 cmd:option('-train_test_rate', 1, '')
-cmd:option('-learning_rate', 0.02, '')
+cmd:option('-learning_rate', 1e-3, '')
 cmd:option('-weight_decay',1e-3,'')
 cmd:option('-momentum',0,'')
 
@@ -72,7 +72,9 @@ local nceProbDisFile = 'train.logpD.s75'
 local dssm_train = DSSM_Train.init()
 local qData, dData = dssm_train:LoadTrainData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
 dssm_train:ModelInit_FromConfig(opt)
-dssm_train:Training(qData, dData, opt)
+for i = 1,20 do
+    dssm_train:Training(qData, dData, opt)
+end
 --print(self.PairStream.qStream.Data.fea_Idx_Mem)
 
 --print(dssm_train)

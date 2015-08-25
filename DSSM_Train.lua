@@ -131,7 +131,6 @@ function DSSM_Train:Training(qData, dData, opt)
                     self.criterion = nn.DSSM_MMI_Criterion(batch_size, opt.ntrial, opt.gamma)
                 end
 
-
                 -- forward the criterion
                 local err = self.criterion:updateOutput(output)
                 print(err)
