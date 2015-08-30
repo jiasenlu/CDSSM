@@ -10,8 +10,8 @@ function Calculate_Alpha.cal_alpha(alpha, nTrial, batchsize, gamma)
 
     local pos_alpha_replicate = pos_alpha:repeatTensor(nTrial)
 
-    neg_alpha = torch.add(pos_alpha_replicate, - neg_alpha) 
-    neg_alpha = torch.exp(torch.mul(neg_alpha, gamma))
+    neg_alpha = torch.add(pos_alpha_replicate, -neg_alpha) 
+    neg_alpha = torch.exp(torch.mul(neg_alpha, -gamma))
     
     local new_alpha = torch.cat(pos_alpha, neg_alpha)
     return new_alpha
@@ -46,6 +46,4 @@ function Calculate_Alpha.cal_alpha_norm(alpha, nTrial, batchsize, gamma)
     return new_alpha
 end
 
-function Calculate_Alpha.cal_gw(gw, nTrial)
-end
 return Calculate_Alpha

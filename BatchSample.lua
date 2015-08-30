@@ -23,10 +23,14 @@ function BatchSample:init_Data(max_batch_size, maxSequence_perBatch, maxElements
     Data.fea_Idx_Mem = torch.IntTensor(maxElements_perBatch)
     Data.fea_Value_Mem = torch.FloatTensor(maxElements_perBatch)
     Data.data_matrix = nil
+    Data.batch_size = nil
     return Data
 end
 
 function BatchSample:Load(Data, mstream, expectedBatchSize, index)
+    
+    Data.batch_size = expectedBatchSize
+
     -- load into 1D sequence vector.
     self.batch_size = expectedBatchSize
     local segsize = mstream[self.pointer]
@@ -55,8 +59,6 @@ function BatchSample:Load(Data, mstream, expectedBatchSize, index)
         Data.seg_Margin_Mem[i] = smp_index
         Data.seg_Len_Mem[i] = 0
     end
-
-    --print(self.seg_Idx_Mem) --test right
 
     for i = 1, elementsize do
         Data.fea_Idx_Mem[i] = mstream[self.pointer]

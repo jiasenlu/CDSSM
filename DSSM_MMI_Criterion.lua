@@ -8,13 +8,40 @@ function DSSM_MMI_Criterion:__init(batch_size, nTrail, gamma)
     self.nTrail = nTrail
     self.gamma = gamma
     -- do negative sampling
+    --[[
     self.D_negtive_array  = torch.IntTensor(batch_size * nTrail)
 
     for i = 1, nTrail do
         local randpos = torch.random(0.8*batch_size) + math.floor(0.1 * batch_size)
         for k = 1, batch_size do
             local bs = (randpos + k) % batch_size + 1
-            self.D_negtive_array [(i-1)*batch_size + k] = bs
+            self.D_negtive_array[(i-1)*batch_size + k] = bs
+        end
+    end
+    ]]--
+    self.D_negtive_array = torch.load('negSampline')
+
+
+    -- inverse negtive array
+    self.D_inver_negtive_index_array = torch.IntTensor(batch_size * nTrail):zero()
+    self.D_inver_negtive_value_array = torch.IntTensor(batch_size * nTrail):zero()
+
+    for i = 1, nTrail do
+        local mlist = torch.IntTensor(batch_size):zero()
+
+        for k = 1, batch_size do
+            local bs = self.D_negtive_array[(i-1) * batch_size + k]
+            mlist[bs] = k
+        end
+
+        local ptotal = 0
+        local pindex = 1
+        for k = 1, batch_size do
+            self.D_inver_negtive_value_array[(i-1)*batch_size+pindex] = mlist[k]
+            pindex = pindex + 1
+            self.D_inver_negtive_index_array[(i-1)*batch_size+k] = ptotal + 1
+            ptotal = self.D_inver_negtive_index_array[(i-1)*batch_size+k]
+
         end
     end
 
@@ -25,12 +52,12 @@ end
 function DSSM_MMI_Criterion:updateOutput(input)
     
     local Q_input, D_input = input[1],input[2]
+    Q_input:tanh()
+    D_input:tanh()
+
     self.dimension = Q_input:size()[2]
-
     self.input1 = Q_input:repeatTensor(self.nTrail+1,1)
-
     self.input2 = torch.Tensor((self.nTrail+1)*self.batch_size, self.dimension):zero()
-
     self.input2:sub(1, self.batch_size):copy(D_input) -- copy the positive
 
     for i = 1, self.nTrail * self.batch_size do
@@ -69,58 +96,105 @@ function DSSM_MMI_Criterion:updateOutput(input)
     self.alpha_buffer = self.alpha_buffer:select(2,1)
 
     -- 2: calculate the alpha 
-    self.alpha_buffer = Calculate_Alpha.cal_alpha(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma)
+    self.alpha_buffer = Calculate_Alpha.cal_alpha(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma) -- check right.
     self.alpha_buffer = Calculate_Alpha.cal_alpha_sum(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma,1)
     self.alpha_buffer = Calculate_Alpha.cal_alpha_norm(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma)
     self.alpha_buffer = Calculate_Alpha.cal_alpha_sum(self.alpha_buffer, self.nTrail, self.batch_size, self.gamma,0)
-
+    
     -- 3: calculate the loss
     local err = 0
     local eps = 1.4e-45
     for i = 1, self.batch_size do
         err = err + math.log(math.max(eps, (1+self.alpha_buffer[i] / math.max(self.gamma - self.alpha_buffer[i], eps))))
+        --err = err + math.log(math.max(self.alpha_buffer[i])
     end
     return err 
 end
 
 function DSSM_MMI_Criterion:updateGradInput()
-    -- here, we didn't use the fomula in the paper, we jsut
-    -- j is the number of negative sampling
-    -- gradInput = Sum_j[alpha_buffer[j] + (delta_postivePair - delta_negtivePair)]
+
+
    local gw1 = torch.Tensor()
    local gw2 = torch.Tensor()
-   gw1:resizeAs(self.input1):copy(self.input2)
-   gw2:resizeAs(self.input1):copy(self.input1)
+   gw1:resizeAs(self.input1):zero()
+   gw2:resizeAs(self.input2):zero()
+
+   -- d / (b * c)
    self.w = self.w:expandAs(self.input1)
-   self.buffer:cmul(self.w1,self.w22)
-   self.buffer = self.buffer:expandAs(self.input1)
-   gw1:addcmul(-1,self.buffer,self.input1)
-   gw1:cmul(self.w)
+   self.w22 = self.w22:expandAs(self.input1)
+   self.w32 = self.w32:expandAs(self.input1)
+   self.w1 = self.w1:expandAs(self.input1)
 
-   local temp = gw1:sub(1, self.batch_size)
+   gw1:cmul(self.input2, self.w)
 
-   gw1 = torch.add(temp:repeatTensor(self.nTrail+1,1), -gw1)
+   -- q * a / (b*b*b*c)
+   self.buffer:cmul(self.w, self.w22)
+   self.buffer:cmul(self.w1, self.buffer)
+   self.buffer:cmul(self.input1, self.buffer)
 
-   self.buffer:cmul(self.w1,self.w32)
-   self.buffer = self.buffer:expandAs(self.input1)
-   gw2:addcmul(-1,self.buffer,self.input2)
-   gw2:cmul(self.w)
+   -- d / (b*c) - a / (bbbc)
+   gw1:add(-self.buffer)
 
-   temp = gw2:sub(1, self.batch_size)
-   
-   gw2 = torch.add(temp:repeatTensor(self.nTrail+1,1), -gw2)
+   -- * (1-q)
+   self.buffer:resizeAs(self.input1):zero()
+   self.buffer:add(-self.input1, 1)
+   gw1:cmul(self.buffer, gw1)
 
-    self.gradInput = {torch.Tensor, torch.Tensor}
-    self.gradInput[1] = torch.Tensor(self.dimension):zero()
-    self.gradInput[2] = torch.Tensor(self.dimension):zero()
+   self.buffer:zero()
+   self.buffer:add(self.input1, 1)
+   gw1:cmul(self.buffer, gw1)
+   gw1:div(self.batch_size)
 
-   for i = 1, self.batch_size do
-        for j = 1, self.nTrail do
-            self.gradInput[1]:add(torch.mul(gw1[j*self.batch_size+i], self.alpha_buffer[j*self.batch_size+i] / self.batch_size ))
-            self.gradInput[2]:add(torch.mul(gw2[j*self.batch_size+i], self.alpha_buffer[j*self.batch_size+i] / self.batch_size ))
-        end
-   end
+   -- for deriv_d
+   -- q / (b * c)
 
-   return self.gradInput
+   gw2:cmul(self.input1, self.w)
+   -- d * a / (b*c*c*c)
+   self.buffer:cmul(self.w, self.w32)
+   self.buffer:cmul(self.w1, self.buffer)
+   self.buffer:cmul(self.input2, self.buffer)
+
+   -- q / (b*c) - d*a / (bbbc)
+   gw2:add(-self.buffer)
+
+   -- * (1-d)
+   self.buffer:resizeAs(self.input2):zero()
+   self.buffer:add(-self.input2, 1)
+   gw2:cmul(self.buffer, gw2)
+
+   self.buffer:zero()
+   self.buffer:add(self.input2, 1)
+   gw2:cmul(self.buffer, gw2)
+   gw2:div(self.batch_size)
+
+  -- matrix_weightAdd
+  -- for i = 1, batchsize*dimension
+  local ngw1 = torch.Tensor(self.batch_size, self.dimension):zero()
+  local ngw2 = torch.Tensor(self.batch_size, self.dimension):zero()
+
+  ngw1:cmul(gw1:sub(1, self.batch_size), self.alpha_buffer:sub(1, self.batch_size):view(-1,1):expandAs(ngw1))
+
+  for i = 1, self.nTrail do
+    ngw1:addcmul(-1, gw1:sub(i*self.batch_size+1, (i+1)*self.batch_size), 
+      self.alpha_buffer:sub(i*self.batch_size+1, (i+1)*self.batch_size):view(-1,1):expandAs(ngw1))  
+  end
+
+
+  ngw2:cmul(gw2:sub(1, self.batch_size), self.alpha_buffer:sub(1, self.batch_size):view(-1,1):expandAs(ngw2))
+  for i = 1, self.batch_size do
+    for j = 1, self.nTrail do
+      local col = self.D_inver_negtive_index_array[(j-1)*self.batch_size + i]
+
+      local row = self.D_inver_negtive_value_array[(j-1)*self.batch_size + col]
+
+      ngw2:sub(i,i):addcmul(-1, gw2:sub(j*self.batch_size + row, j*self.batch_size + row),  
+        self.alpha_buffer:sub(j*self.batch_size + row, j*self.batch_size + row):view(-1,1):expandAs(ngw2:sub(i,i)))
+    end
+  end
+
+
+  self.gradInput = {ngw1, ngw2}
+
+  return self.gradInput
 
 end

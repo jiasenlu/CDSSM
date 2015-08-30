@@ -9,17 +9,17 @@ local SequenceInputStream = require 'SequenceInputStream'
 local inFile = 'data/train.pair.tok.tsv'
 local srcVocFile = 'data/l3g.txt'
 local tgtVocFile = 'data/l3g.txt'
-local nMaxLength = 20
+local nMaxLength = 1
 
 local outFile = 'data/train'
 
---local tst = WordHash.Pair2SeqFea(inFile, srcVocFile, tgtVocFile, nMaxLength, 1, 2, outFile, 'l3g')
+--WordHash.Pair2SeqFea(inFile, srcVocFile, tgtVocFile, nMaxLength, 1, 2, outFile, 'l3g')
 
-local inFile = 'data/train.src.seq.fea'
-local BatchSize = 1024
-local outFile = 'data/train.src.seq.fea.t7'
+--local inFile = 'data/train.src.seq.fea'
+--local BatchSize = 1024
+--local outFile = 'data/train.src.seq.fea.t7'
 
-WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
+--WordHash.SeqFea2Bin(inFile, BatchSize, outFile)
 
 local inFile = 'data/train.tgt.seq.fea'
 local BatchSize = 1024

@@ -26,7 +26,7 @@ cmd:option('-neg_static_sample', 0, '')
 cmd:option('-max_iter', 500, '')
 cmd:option('-gamma', 25, '')
 cmd:option('-train_test_rate', 1, '')
-cmd:option('-learning_rate', 1e-3, '')
+cmd:option('-learning_rate', 0.1, '')
 cmd:option('-weight_decay',1e-3,'')
 cmd:option('-momentum',0,'')
 
@@ -47,13 +47,14 @@ cmd:option('-feature_dimension_query', 0, '')
 
 cmd:option('-feature_dimension_doc', 0, '')
 
-cmd:option('-data_format', 0, '0=dense, 1=sparse')
+cmd:option('-data_format', 1, '0=dense, 1=sparse')
 cmd:option('-word_len', 20, '')
 cmd:option('-mirror_init', 0, '')
 cmd:option('-device', 'gpu', '')
 cmd:option('-reject_rate', 1, '')
 cmd:option('-down_rate', 1, '')
 cmd:option('-accept_range', 1, '')
+cmd:option('-mode', 0, '1:gpu, 0:cpu')
 cmd:text()
 
 opt = cmd:parse(arg)
@@ -68,6 +69,12 @@ local dFileName = 'train.tgt.seq.fea.t7'
 local nceProbDisFile = 'train.logpD.s75'
 
 -- the Data is the root Cdata place for storing the data.
+if opt.mode == 1 then
+   print('==> switching to CUDA')
+   require 'cunn'
+   torch.setdefaulttensortype('torch.FloatTensor')
+   cutorch.setDevice(opt.gpu_device)
+end
 
 local dssm_train = DSSM_Train.init()
 local qData, dData = dssm_train:LoadTrainData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
