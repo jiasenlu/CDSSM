@@ -25,7 +25,10 @@ function DSSM_Train.init()
     return self
 end
 
-
+function DSSM_Train:reset_pointer()
+    self.PairStream.qStream.dataFun.pointer = 1
+    self.PairStream.dStream.dataFun.pointer = 1
+end
 function DSSM_Train:LoadTrainData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
     -- doing shuffle and ...
 
@@ -56,7 +59,7 @@ function DSSM_Train:ModelInit_FromConfig(opt)
     local Q_feature_size = self.PairStream.qStream.feature_size
     local D_feature_size = self.PairStream.dStream.feature_size
 
-    local wind_size = 1
+    local wind_size = 3
     local batch_size = 1024
     -- input is feature_size * window_size, filter is the same size. if we use the 
     -- 3D tensor, then the [dw] == 1
@@ -64,8 +67,10 @@ function DSSM_Train:ModelInit_FromConfig(opt)
     -- Using gModule to construct the network
     -- 3D initilzation is saving the memory than 2D initilzation
 
-    local Q_1_layer = nn.CDSSM_SparseLinear(Q_feature_size * wind_size, 1000)()
+    --local Q_1_layer = nn.CDSSM_SparseLinear(Q_feature_size * wind_size, 1000)()
+    --local Q_1_layer = nn.TemporalConvolution(Q_feature_size * wind_size, 1000, 1)()
 
+    local Q_1_layer = nn.Linear(Q_feature_size,1000)()
     local Q_1_link = nn.Tanh()(Q_1_layer)
 
     --local Q_1_pool = nn.TemporalMaxPooling(18)(Q_1_link)
@@ -75,9 +80,12 @@ function DSSM_Train:ModelInit_FromConfig(opt)
 
 
 
-    local D_1_layer = nn.CDSSM_SparseLinear(D_feature_size * wind_size, 1000)()
+    --local D_1_layer = nn.CDSSM_SparseLinear(D_feature_size * wind_size, 1000)()
+    --local D_1_layer = nn.TemporalConvolution(D_feature_size * wind_size, 1000, 1)()
+    
+    local D_1_layer = nn.Linear(D_feature_size, 1000)()
     local D_1_link = nn.Tanh()(D_1_layer)
-    -- then a max pooling layer
+
     --local D_1_pool = nn.TemporalMaxPooling(18)(D_1_link)
     --local D_1_reshape = nn.Reshape(1000, true)(D_1_pool)
     -- second layer
@@ -86,6 +94,7 @@ function DSSM_Train:ModelInit_FromConfig(opt)
     local model = nn.gModule({Q_1_layer, D_1_layer}, {Q_2_layer, D_2_layer})
     -- get the non-sparse query, document and index
     --self.model = model
+    
     for indexNode, node in ipairs(model.forwardnodes) do
     
       if node.data.module then
@@ -94,6 +103,7 @@ function DSSM_Train:ModelInit_FromConfig(opt)
         if indexNode == 4 then
             local weight = torch.load('Q_L1_weight'):view(-1,1000)
             node.data.module.weight = weight:t()
+            node.data.module.bias:zero()
         end
         if indexNode == 6 then
             local weight = torch.load('Q_L2_weight'):view(-1,300)
@@ -103,6 +113,7 @@ function DSSM_Train:ModelInit_FromConfig(opt)
         if indexNode == 8 then
             local weight = torch.load('D_L1_weight'):view(-1,1000)
             node.data.module.weight = weight:t()
+            node.data.module.bias:zero()
         end
 
         if indexNode == 10 then
@@ -112,10 +123,11 @@ function DSSM_Train:ModelInit_FromConfig(opt)
         end     
       end
     end    
+    
 
     self.model = model
+    
     parameters,gradParameters = self.model:getParameters()
-
     --print(Q_feature_size)
     --print(parameters:size())
     
@@ -136,8 +148,10 @@ function DSSM_Train:Training(qData, dData, opt)
         --xlua.progress(i, self.PairStream.qStream.batch_num)
         local flag, qData, dData = self.PairStream:Next_Batch(qData, dData, srcNorm, tgtNorm, opt)
         -- doing the forward process
-        
+        local qTensor = qData.data_matrix:double()
+        local dTensor = dData.data_matrix:double()
         -- negtive samping index
+        
         local batch_size = self.PairStream.qStream.dataFun.batch_size
 
         local feval = function(x)
@@ -146,9 +160,11 @@ function DSSM_Train:Training(qData, dData, opt)
                 end
                 gradParameters:zero()
                 -- get the cosine similarity for all positive and negtive.
-                --local output = self.model:forward({qData, dData})
+                local output = self.model:forward({qTensor, dTensor})
+
+
                 --torch.save('output', output)
-                local output = torch.load('output')
+                --local output = torch.load('output')
                 -- initialize the criterion function here, in order we can intilized the negative sampling 
                 -- differently for each batch
 
@@ -163,10 +179,9 @@ function DSSM_Train:Training(qData, dData, opt)
 
                 -- forward the criterion
                 local err = self.criterion:updateOutput(output)
-                print(err)
                 local do_df = self.criterion:updateGradInput()
                 self.model:backward(output, do_df)
-
+                print(err)
                 return err, gradParameters
             end
             self.optimMethod(feval, parameters, self.optimState)

@@ -66,7 +66,6 @@ function BatchSample:Load(Data, mstream, expectedBatchSize, index)
     end
     --print(self.fea_Idx_Mem)-- the word level hash order maybe different-- mater?
 
-
     local sum = 0
     local seg_index = 1
 
@@ -120,5 +119,39 @@ function BatchSample:Sparse_to_Dense(Data, expectedBatchSize, feature_size, opt)
     return Data
 end
 
+
+function BatchSample:Sparse_to_Dense_Linear(Data, expectedBatchSize, feature_size, opt)
+    -- transfer the sparse vector to dense matrix batch.
+    local win_size = 1
+    local seg_len = opt.word_len  -- we need to fix the seg_len here, the last dim is bow encodding.
+    -- initialize the tensor.
+    local data_matrix = torch.IntTensor(expectedBatchSize, feature_size):zero()
+    local zero_matrix = torch.IntTensor(1):zero()
+    
+    Data.sample_Idx_Mem = torch.cat(zero_matrix, Data.sample_Idx_Mem)
+    Data.seg_Idx_Mem = torch.cat(zero_matrix, Data.seg_Idx_Mem)
+
+    for i = 1, expectedBatchSize do
+        -- for each sentence
+        local sample_Idx_start = Data.sample_Idx_Mem[i]
+        local sample_Idx_end = Data.sample_Idx_Mem[i+1]
+        for j = sample_Idx_start+1, sample_Idx_end do
+            -- for each words
+            local seg_Idx_start = Data.seg_Idx_Mem[j]
+            local seg_Idx_end = Data.seg_Idx_Mem[j+1]
+            for k = seg_Idx_start+1, seg_Idx_end do
+                local idx = Data.fea_Idx_Mem[k]
+                local value = Data.fea_Value_Mem[k]
+                data_matrix[i][idx] = value
+            end
+        end
+    end    
+
+    Data.data_matrix = data_matrix
+    -- this is only when window size == 1, 
+    --Data.data_matrix = data_matrix:sub(1,expectedBatchSize, 1, seg_len - win_size +1)
+    
+    return Data
+end
 
 return BatchSample

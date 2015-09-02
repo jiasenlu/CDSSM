@@ -26,8 +26,8 @@ cmd:option('-neg_static_sample', 0, '')
 cmd:option('-max_iter', 500, '')
 cmd:option('-gamma', 25, '')
 cmd:option('-train_test_rate', 1, '')
-cmd:option('-learning_rate', 0.1, '')
-cmd:option('-weight_decay',1e-3,'')
+cmd:option('-learning_rate', 1e-1, '')
+cmd:option('-weight_decay',1e-2,'')
 cmd:option('-momentum',0,'')
 
 cmd:option('-source_layer_dim', '1000 - 300', '')
@@ -47,7 +47,7 @@ cmd:option('-feature_dimension_query', 0, '')
 
 cmd:option('-feature_dimension_doc', 0, '')
 
-cmd:option('-data_format', 1, '0=dense, 1=sparse')
+cmd:option('-data_format', 0, '0=dense, 1=sparse')
 cmd:option('-word_len', 20, '')
 cmd:option('-mirror_init', 0, '')
 cmd:option('-device', 'gpu', '')
@@ -81,6 +81,7 @@ local qData, dData = dssm_train:LoadTrainData(data_dir, qFileName, dFileName, nc
 dssm_train:ModelInit_FromConfig(opt)
 for i = 1,20 do
     dssm_train:Training(qData, dData, opt)
+    dssm_train:reset_pointer()
 end
 --print(self.PairStream.qStream.Data.fea_Idx_Mem)
 

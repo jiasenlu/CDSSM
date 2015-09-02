@@ -8,7 +8,7 @@ function DSSM_MMI_Criterion:__init(batch_size, nTrail, gamma)
     self.nTrail = nTrail
     self.gamma = gamma
     -- do negative sampling
-    --[[
+
     self.D_negtive_array  = torch.IntTensor(batch_size * nTrail)
 
     for i = 1, nTrail do
@@ -18,8 +18,8 @@ function DSSM_MMI_Criterion:__init(batch_size, nTrail, gamma)
             self.D_negtive_array[(i-1)*batch_size + k] = bs
         end
     end
-    ]]--
-    self.D_negtive_array = torch.load('negSampline')
+    
+    --self.D_negtive_array = torch.load('negSampline')
 
 
     -- inverse negtive array
@@ -113,7 +113,6 @@ end
 
 function DSSM_MMI_Criterion:updateGradInput()
 
-
    local gw1 = torch.Tensor()
    local gw2 = torch.Tensor()
    gw1:resizeAs(self.input1):zero()
@@ -192,8 +191,7 @@ function DSSM_MMI_Criterion:updateGradInput()
     end
   end
 
-
-  self.gradInput = {ngw1, ngw2}
+  self.gradInput = {-ngw1, -ngw2}
 
   return self.gradInput
 

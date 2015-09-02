@@ -33,6 +33,7 @@ function SequenceInputStream:get_dimension(data_dir, fileName, opt)
     self.maxSequence_perBatch = self.mstream[-3]
     self.maxElement_perBatch = self.mstream[-2]
 
+    print(self)
     local batch_size = self.mstream[-1]
 
     assert(batch_size == opt.batch_size, "batch_size does not match bettwen configuration and input data!")
@@ -63,7 +64,6 @@ end
 
 
 function SequenceInputStream:LoadDataBatch(Data, allowedFeatureDimension, opt)
-    print('Perform Sparse to Dense transform...')
     local expectedBatchSize = self.batch_size
     if self.batch_index == self.batch_num and self.last_incomplete_batch_size ~= 0 then
         expectedBatchSize = self.last_incomplete_batch_size
@@ -75,7 +75,7 @@ function SequenceInputStream:LoadDataBatch(Data, allowedFeatureDimension, opt)
 
     if opt.data_format == 0 then
     -- if the input is dense.
-        Data = self.dataFun:Sparse_to_Dense(Data, expectedBatchSize, self.feature_size, opt)
+        Data = self.dataFun:Sparse_to_Dense_Linear(Data, expectedBatchSize, self.feature_size, opt)
     end
     return Data
 end
