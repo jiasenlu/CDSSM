@@ -33,7 +33,6 @@ function SequenceInputStream:get_dimension(data_dir, fileName, opt)
     self.maxSequence_perBatch = self.mstream[-3]
     self.maxElement_perBatch = self.mstream[-2]
 
-    print(self)
     local batch_size = self.mstream[-1]
 
     assert(batch_size == opt.batch_size, "batch_size does not match bettwen configuration and input data!")
@@ -75,7 +74,11 @@ function SequenceInputStream:LoadDataBatch(Data, allowedFeatureDimension, opt)
 
     if opt.data_format == 0 then
     -- if the input is dense.
-        Data = self.dataFun:Sparse_to_Dense_Linear(Data, expectedBatchSize, self.feature_size, opt)
+        if opt.convo == 1 then
+            Data = self.dataFun:Sparse_to_Dense(Data, expectedBatchSize, self.feature_size, opt)
+        else
+            Data = self.dataFun:Sparse_to_Dense_Linear(Data, expectedBatchSize, self.feature_size, opt)
+        end
     end
     return Data
 end

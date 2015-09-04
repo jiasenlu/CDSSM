@@ -26,9 +26,9 @@ cmd:option('-neg_static_sample', 0, '')
 cmd:option('-max_iter', 500, '')
 cmd:option('-gamma', 25, '')
 cmd:option('-train_test_rate', 1, '')
-cmd:option('-learning_rate', 1e-1, '')
-cmd:option('-weight_decay',1e-2,'')
-cmd:option('-momentum',0,'')
+cmd:option('-learning_rate', 0.1, '')
+cmd:option('-weight_decay',0.01,'')
+cmd:option('-momentum',0.9,'')
 
 cmd:option('-source_layer_dim', '1000 - 300', '')
 cmd:option('-source_layer_sigma', '0.1 - 0.1', '')
@@ -55,6 +55,7 @@ cmd:option('-reject_rate', 1, '')
 cmd:option('-down_rate', 1, '')
 cmd:option('-accept_range', 1, '')
 cmd:option('-mode', 0, '1:gpu, 0:cpu')
+cmd:option('-convo', 1)
 cmd:text()
 
 opt = cmd:parse(arg)
@@ -79,7 +80,8 @@ end
 local dssm_train = DSSM_Train.init()
 local qData, dData = dssm_train:LoadTrainData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
 dssm_train:ModelInit_FromConfig(opt)
-for i = 1,20 do
+for i = 1,opt.max_iter do
+    print('iter ' .. i .. '...') 
     dssm_train:Training(qData, dData, opt)
     dssm_train:reset_pointer()
 end

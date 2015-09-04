@@ -2,13 +2,13 @@ local DSSM_MMI_Criterion, parent = torch.class('nn.DSSM_MMI_Criterion', 'nn.Crit
 
 local Calculate_Alpha = require 'Calculate_Alpha'
 
-function DSSM_MMI_Criterion:__init(batch_size, nTrail, gamma)
+function DSSM_MMI_Criterion:__init(batch_size, nTrail, gamma, BATCH_SIZE)
     parent.__init(self)
     self.batch_size = batch_size
     self.nTrail = nTrail
     self.gamma = gamma
     -- do negative sampling
-
+    self.BATCH_SIZE = BATCH_SIZE
     self.D_negtive_array  = torch.IntTensor(batch_size * nTrail)
 
     for i = 1, nTrail do
@@ -190,7 +190,6 @@ function DSSM_MMI_Criterion:updateGradInput()
         self.alpha_buffer:sub(j*self.batch_size + row, j*self.batch_size + row):view(-1,1):expandAs(ngw2:sub(i,i)))
     end
   end
-
   self.gradInput = {-ngw1, -ngw2}
 
   return self.gradInput

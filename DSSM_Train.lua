@@ -68,62 +68,77 @@ function DSSM_Train:ModelInit_FromConfig(opt)
     -- 3D initilzation is saving the memory than 2D initilzation
 
     --local Q_1_layer = nn.CDSSM_SparseLinear(Q_feature_size * wind_size, 1000)()
-    --local Q_1_layer = nn.TemporalConvolution(Q_feature_size * wind_size, 1000, 1)()
 
-    local Q_1_layer = nn.Linear(Q_feature_size,1000)()
-    local Q_1_link = nn.Tanh()(Q_1_layer)
+    local model
+    if opt.convo == 0 then
 
-    --local Q_1_pool = nn.TemporalMaxPooling(18)(Q_1_link)
-    --local Q_1_reshape = nn.Reshape(1000, true)(Q_1_pool)
+        local Q_1_layer = nn.Linear(Q_feature_size,1000)()
+        local Q_1_link = nn.Tanh()(Q_1_layer)
+        local Q_2_layer = nn.Linear(1000, 300)(Q_1_link)
+    
+        local D_1_layer = nn.Linear(D_feature_size, 1000)()
+        local D_1_link = nn.Tanh()(D_1_layer)
+        local D_2_layer = nn.Linear(1000, 300)(D_1_link)
+
+        model = nn.gModule({Q_1_layer, D_1_layer}, {Q_2_layer, D_2_layer})
+
+
+    else
+
+        local Q_1_layer = nn.TemporalConvolution(Q_feature_size * wind_size, 1000, 1)()
+        local Q_1_link = nn.Tanh()(Q_1_layer)
+        local Q_1_pool = nn.TemporalMaxPooling(18)(Q_1_link)
+        local Q_1_reshape = nn.Reshape(1000, true)(Q_1_pool)
+        local Q_2_layer = nn.Linear(1000, 300)(Q_1_reshape)
+
+        local D_1_layer = nn.TemporalConvolution(D_feature_size * wind_size, 1000, 1)()    
+        local D_1_link = nn.Tanh()(D_1_layer)
+        local D_1_pool = nn.TemporalMaxPooling(18)(D_1_link)
+        local D_1_reshape = nn.Reshape(1000, true)(D_1_pool)
+        local D_2_layer = nn.Linear(1000, 300)(D_1_reshape)
+        model = nn.gModule({Q_1_layer, D_1_layer}, {Q_2_layer, D_2_layer})
+
+    end
+
     -- second layer
-    local Q_2_layer = nn.Linear(1000, 300)(Q_1_link)
-
-
 
     --local D_1_layer = nn.CDSSM_SparseLinear(D_feature_size * wind_size, 1000)()
-    --local D_1_layer = nn.TemporalConvolution(D_feature_size * wind_size, 1000, 1)()
-    
-    local D_1_layer = nn.Linear(D_feature_size, 1000)()
-    local D_1_link = nn.Tanh()(D_1_layer)
 
-    --local D_1_pool = nn.TemporalMaxPooling(18)(D_1_link)
-    --local D_1_reshape = nn.Reshape(1000, true)(D_1_pool)
     -- second layer
-    local D_2_layer = nn.Linear(1000, 300)(D_1_link)
 
-    local model = nn.gModule({Q_1_layer, D_1_layer}, {Q_2_layer, D_2_layer})
     -- get the non-sparse query, document and index
     --self.model = model
-    
+    --[[
     for indexNode, node in ipairs(model.forwardnodes) do
     
       if node.data.module then
         print(indexNode, node.data.module)
         
         if indexNode == 4 then
-            local weight = torch.load('Q_L1_weight'):view(-1,1000)
+            local weight = torch.load('init_param/Q_L1_weight'):view(-1,1000)
             node.data.module.weight = weight:t()
             node.data.module.bias:zero()
         end
         if indexNode == 6 then
-            local weight = torch.load('Q_L2_weight'):view(-1,300)
+            local weight = torch.load('init_param/Q_L2_weight'):view(-1,300)
             node.data.module.weight = weight:t()
             node.data.module.bias:zero()
         end
         if indexNode == 8 then
-            local weight = torch.load('D_L1_weight'):view(-1,1000)
+            local weight = torch.load('init_param/D_L1_weight'):view(-1,1000)
             node.data.module.weight = weight:t()
             node.data.module.bias:zero()
         end
 
         if indexNode == 10 then
-            local weight = torch.load('D_L2_weight'):view(-1,300)
+            local weight = torch.load('init_param/D_L2_weight'):view(-1,300)
             node.data.module.weight = weight:t()
             node.data.module.bias:zero()
         end     
+        
       end
     end    
-    
+    ]]--
 
     self.model = model
     
@@ -152,6 +167,7 @@ function DSSM_Train:Training(qData, dData, opt)
         local dTensor = dData.data_matrix:double()
         -- negtive samping index
         
+        print({qTensor, dTensor})
         local batch_size = self.PairStream.qStream.dataFun.batch_size
 
         local feval = function(x)
@@ -174,14 +190,16 @@ function DSSM_Train:Training(qData, dData, opt)
                 end
 
                 if opt.objective == 'MMI' then
-                    self.criterion = nn.DSSM_MMI_Criterion(batch_size, opt.ntrial, opt.gamma)
+                    self.criterion = nn.DSSM_MMI_Criterion(batch_size, opt.ntrial, opt.gamma, opt.batch_size)
                 end
 
                 -- forward the criterion
                 local err = self.criterion:updateOutput(output)
                 local do_df = self.criterion:updateGradInput()
                 self.model:backward(output, do_df)
-                print(err)
+                print(err / batch_size)
+                gradParameters:div(batch_size)
+                err = err / batch_size
                 return err, gradParameters
             end
             self.optimMethod(feval, parameters, self.optimState)
