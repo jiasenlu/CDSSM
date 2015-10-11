@@ -24,9 +24,9 @@ function SequenceInputStream.init()
     return self
 end
 
-function SequenceInputStream:get_dimension(data_dir, fileName, opt)
+function SequenceInputStream:get_dimension(data_dir, fileName, feature_dimension, batchSize)
 
-    self.batch_size = opt.batch_size
+    self.batch_size = batchSize
     self.mstream = torch.load(path.join(data_dir, fileName))
     self.feature_size = self.mstream[-5]
     self.total_batch_size = self.mstream[-4]
@@ -35,7 +35,11 @@ function SequenceInputStream:get_dimension(data_dir, fileName, opt)
 
     local batch_size = self.mstream[-1]
 
-    assert(batch_size == opt.batch_size, "batch_size does not match bettwen configuration and input data!")
+    if feature_dimension > self.feature_size then
+        self.feature_size = feature_dimension
+    end
+    print(batch_size, batchSize)
+    assert(batch_size == batchSize, "batch_size does not match bettwen configuration and input data!")
 
     self.dataFun = BatchSample.init()
     local Data = BatchSample:init_Data(batch_size, self.maxSequence_perBatch, self.maxElement_perBatch)
@@ -71,7 +75,6 @@ function SequenceInputStream:LoadDataBatch(Data, allowedFeatureDimension, opt)
 
         Data = self.dataFun:Load(Data, self.mstream, expectedBatchSize, self.batch_index)
     end
-
     if opt.data_format == 0 then
     -- if the input is dense.
         if opt.convo == 1 then

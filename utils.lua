@@ -11,7 +11,6 @@ function utils.String2FeatStrSeq(s, N, nMaxLength, featType)
     for token in s:gmatch("[^%s]+") do
         table.insert(rgw, token)
     end
-
     local rgWfs = {}
     for i = 1, math.min(#rgw, nMaxLength-1) do
         if featType == 'l3g' then
@@ -136,6 +135,5 @@ function utils.String2Matrix(s)
     end
     return mt
 end
-
 
 return utils 

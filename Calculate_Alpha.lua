@@ -13,8 +13,9 @@ function Calculate_Alpha.cal_alpha(alpha, nTrial, batchsize, gamma)
     neg_alpha = torch.add(pos_alpha_replicate, -neg_alpha) 
     neg_alpha = torch.exp(torch.mul(neg_alpha, -gamma))
     
-    local new_alpha = torch.cat(pos_alpha, neg_alpha)
-    return new_alpha
+    --local new_alpha = torch.cat(pos_alpha, neg_alpha)
+    alpha:sub(batchsize+1, -1):copy(neg_alpha)
+    return alpha
 end
 
 function Calculate_Alpha.cal_alpha_sum(alpha, nTrial, batchsize, gamma, init)
@@ -26,8 +27,9 @@ function Calculate_Alpha.cal_alpha_sum(alpha, nTrial, batchsize, gamma, init)
       pos_alpha:add(neg_alpha_split[i])
     end
     pos_alpha:add(init)
-    local new_alpha = torch.cat(pos_alpha, neg_alpha)
-    return new_alpha
+    --local new_alpha = torch.cat(pos_alpha, neg_alpha)
+    alpha:sub(1,batchsize):copy(pos_alpha)
+    return alpha
 end
 
 function Calculate_Alpha.cal_alpha_norm(alpha, nTrial, batchsize, gamma)
@@ -41,9 +43,10 @@ function Calculate_Alpha.cal_alpha_norm(alpha, nTrial, batchsize, gamma)
 
     neg_alpha = torch.cdiv(neg_alpha, pos_alpha_replicate)
     neg_alpha = torch.mul(neg_alpha, gamma)
-    local new_alpha = torch.cat(pos_alpha, neg_alpha)
+    --local new_alpha = torch.cat(pos_alpha, neg_alpha)
+    alpha:sub(batchsize+1, -1):copy(neg_alpha)
 
-    return new_alpha
+    return alpha
 end
 
 return Calculate_Alpha

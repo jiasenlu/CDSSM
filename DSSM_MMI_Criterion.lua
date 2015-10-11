@@ -52,12 +52,12 @@ end
 function DSSM_MMI_Criterion:updateOutput(input)
     
     local Q_input, D_input = input[1],input[2]
-    Q_input:tanh()
-    D_input:tanh()
+    --Q_input:tanh()
+    --D_input:tanh()
 
     self.dimension = Q_input:size()[2]
     self.input1 = Q_input:repeatTensor(self.nTrail+1,1)
-    self.input2 = torch.Tensor((self.nTrail+1)*self.batch_size, self.dimension):zero()
+    self.input2 = torch.Tensor((self.nTrail+1)*self.batch_size, self.dimension):zero():typeAs(D_input)
     self.input2:sub(1, self.batch_size):copy(D_input) -- copy the positive
 
     for i = 1, self.nTrail * self.batch_size do
@@ -90,8 +90,11 @@ function DSSM_MMI_Criterion:updateOutput(input)
     self.w32:sum(self.buffer,2):add(epsilon)
     self.w32:cdiv(self.ones, self.w32)
     self.w:cmul(self.w32)
-    self.w:sqrt()
-
+    self.w:sqrt() 
+    -- self.w = b*c
+    -- self.w32 = c^2
+    -- self.w22 = b^2
+    -- self.w1 = a
     self.alpha_buffer= torch.cmul(self.w1,self.w)
     self.alpha_buffer = self.alpha_buffer:select(2,1)
 
@@ -113,36 +116,24 @@ end
 
 function DSSM_MMI_Criterion:updateGradInput()
 
-   local gw1 = torch.Tensor()
-   local gw2 = torch.Tensor()
+   local gw1 = torch.Tensor():typeAs(self.input1)
+   local gw2 = torch.Tensor():typeAs(self.input2)
    gw1:resizeAs(self.input1):zero()
    gw2:resizeAs(self.input2):zero()
 
-   -- d / (b * c)
    self.w = self.w:expandAs(self.input1)
    self.w22 = self.w22:expandAs(self.input1)
    self.w32 = self.w32:expandAs(self.input1)
    self.w1 = self.w1:expandAs(self.input1)
 
-   gw1:cmul(self.input2, self.w)
+   gw1:cmul(self.input2, self.w) -- bc * Yd
 
-   -- q * a / (b*b*b*c)
-   self.buffer:cmul(self.w, self.w22)
-   self.buffer:cmul(self.w1, self.buffer)
-   self.buffer:cmul(self.input1, self.buffer)
+   -- q * a * (b*b*b*c)
+   self.buffer:cmul(self.w, self.w22)  -- (b*b*b*c)
+   self.buffer:cmul(self.w1, self.buffer) -- a * ...
+   self.buffer:cmul(self.input1, self.buffer) -- Yq * ...
 
-   -- d / (b*c) - a / (bbbc)
-   gw1:add(-self.buffer)
-
-   -- * (1-q)
-   self.buffer:resizeAs(self.input1):zero()
-   self.buffer:add(-self.input1, 1)
-   gw1:cmul(self.buffer, gw1)
-
-   self.buffer:zero()
-   self.buffer:add(self.input1, 1)
-   gw1:cmul(self.buffer, gw1)
-   gw1:div(self.batch_size)
+   gw1:add(-self.buffer) -- bc * Yd - a * (b*b*b*c) * Yq
 
    -- for deriv_d
    -- q / (b * c)
@@ -156,20 +147,10 @@ function DSSM_MMI_Criterion:updateGradInput()
    -- q / (b*c) - d*a / (bbbc)
    gw2:add(-self.buffer)
 
-   -- * (1-d)
-   self.buffer:resizeAs(self.input2):zero()
-   self.buffer:add(-self.input2, 1)
-   gw2:cmul(self.buffer, gw2)
-
-   self.buffer:zero()
-   self.buffer:add(self.input2, 1)
-   gw2:cmul(self.buffer, gw2)
-   gw2:div(self.batch_size)
-
   -- matrix_weightAdd
   -- for i = 1, batchsize*dimension
-  local ngw1 = torch.Tensor(self.batch_size, self.dimension):zero()
-  local ngw2 = torch.Tensor(self.batch_size, self.dimension):zero()
+  local ngw1 = torch.Tensor(self.batch_size, self.dimension):zero():typeAs(gw1)
+  local ngw2 = torch.Tensor(self.batch_size, self.dimension):zero():typeAs(gw2)
 
   ngw1:cmul(gw1:sub(1, self.batch_size), self.alpha_buffer:sub(1, self.batch_size):view(-1,1):expandAs(ngw1))
 
@@ -183,13 +164,12 @@ function DSSM_MMI_Criterion:updateGradInput()
   for i = 1, self.batch_size do
     for j = 1, self.nTrail do
       local col = self.D_inver_negtive_index_array[(j-1)*self.batch_size + i]
-
       local row = self.D_inver_negtive_value_array[(j-1)*self.batch_size + col]
-
       ngw2:sub(i,i):addcmul(-1, gw2:sub(j*self.batch_size + row, j*self.batch_size + row),  
         self.alpha_buffer:sub(j*self.batch_size + row, j*self.batch_size + row):view(-1,1):expandAs(ngw2:sub(i,i)))
     end
   end
+
   self.gradInput = {-ngw1, -ngw2}
 
   return self.gradInput

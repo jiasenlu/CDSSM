@@ -26,4 +26,28 @@ function th_utils.trim(s)
   return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
+function th_utils.spairs(t, order)
+    local keys = {}
+    for k in pairs(t) do keys[#keys+1] = k end
+
+    if order then
+        table.sort(keys, function(a,b) return order(t,a,b) end)
+    else
+        table.sort(keys)
+    end
+    local sorted = {}
+    for i = 1,#keys do
+        sorted[i] = keys[i]
+    end
+    return sorted
+end
+
+function th_utils.IsFile(path)
+  if io.open(path,'r')~=nil then
+    return true
+  else
+    return false
+  end
+end
+
 return th_utils

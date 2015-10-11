@@ -28,7 +28,7 @@ end
 
 function PairInputStream:Load_Train_PairData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
     
-    local qData, dData = self:Load_PairData(data_dir, qFileName, dFileName, nceProbDisFile)
+    local qData, dData = self:Load_PairData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
 
     if opt.feature_dimension_query <= 0 or opt.feature_dimension_doc <= 0 then
         opt.feature_dimension_query = self.qStream.feature_size
@@ -43,12 +43,12 @@ function PairInputStream:Load_Train_PairData(data_dir, qFileName, dFileName, nce
 end
 
 
-function PairInputStream:Load_PairData(data_dir, qFileName, dFileName, nceProbDisFile)
+function PairInputStream:Load_PairData(data_dir, qFileName, dFileName, nceProbDisFile, opt)
     self.qStream = SequenceInputStream.init()
-    local qData = self.qStream:get_dimension(data_dir, qFileName, opt)
+    local qData = self.qStream:get_dimension(data_dir, qFileName, opt.feature_dimension_query, opt.batch_size)
 
     self.dStream = SequenceInputStream.init()
-    local dData = self.dStream:get_dimension(data_dir, dFileName, opt)
+    local dData = self.dStream:get_dimension(data_dir, dFileName, opt.feature_dimension_doc, opt.batch_size)
 
     if nceProbDisFile ~= nil then
 
@@ -69,7 +69,6 @@ function PairInputStream:Init_Batch()
     -- set the batch index to be 0
     self.qStream:init_batch()
     self.dStream:init_batch()
-
 end
 
 function PairInputStream:Next_Batch(qData, dData, srcNorm, tgtNorm, opt)
