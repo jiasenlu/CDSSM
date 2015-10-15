@@ -1,3 +1,5 @@
+*** Note: Still in developing.
+
 ** implementation of (c)DSSM in torch
 
 * For more detail of the paper, see (http://research.microsoft.com/en-us/projects/dssm/)
