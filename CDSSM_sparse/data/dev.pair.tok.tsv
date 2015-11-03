@@ -1,0 +1,1000 @@
+what is the name of  e1  brother	people person sibling_s people sibling_relationship sibling
+what state does  e1 	people person places_lived people place_lived location
+what country is the  e1  in	location location containedby
+what kind of money to take to  e1 	location country currency_used
+who does  e1  play for	sports pro_athlete teams basketball basketball_roster_position team
+who does  e1  play for	basketball basketball_player team basketball basketball_roster_position team
+who does  e1  play for	sports pro_athlete teams sports sports_team_roster team
+who does  e1  play for	basketball basketball_player team sports sports_team_roster team
+who does  e1  play for	basketball basketball_player player_statistics basketball basketball_player_stats team
+who does  e1  play for	sports drafted_athlete drafted sports sports_league_draft_pick team
+who does  e1  play for	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+where are the nfl  e1  from	user szaijan fantasy_football player nfl_team
+where did  e1  live	people person nationality
+how old is  e1 	base popstra celebrity insult_victim base popstra public_insult perpetrator
+who did  e1  malloy end up marrying	fictional_universe fictional_character married_to fictional_universe marriage_of_fictional_characters spouses
+where is  e1  italy located on a map	user narphorium default_domain base_equivalent_location base
+where is rome  e1  located on a map	location country capital
+what is  e1  nationality	people person nationality
+which  e1  died first	fictional_universe person_in_fiction representations_in_fiction
+which  e1  died first	visual_art art_subject artwork_on_the_subject
+where to fly into  e1 	travel travel_destination how_to_get_here travel transportation transport_terminus
+what to see near  e1 	travel travel_destination tourist_attractions
+what form of government does  e1  have today	location country form_of_government
+what movies does  e1  play in	award award_nominee award_nominations award award_nomination nominated_for
+what movies does  e1  play in	award award_winner awards_won award award_honor honored_for
+how much did  e1  gain during pregnancy	tv tv_actor starring_roles tv regular_tv_appearance series
+who was  e1   s mom	people person parents
+what was  e1  trying to accomplish	base activism activist area_of_activism
+where are the  e1  on a world map	base aareas schema administrative_area administrative_parent
+where are the  e1  on a world map	location location containedby
+where are the  e1  on a world map	location administrative_division first_level_division_of
+where are the  e1  on a world map	base aareas schema administrative_area subdivides_place
+what are the major cities in  e1 	location country capital
+what are the major cities in  e1 	base locations countries cities_within
+what city did  e1  live in	people person place_of_birth
+what sport do the  e1  play	sports sports_team sport
+what sport do the  e1  play	base events event_presenting_organisation event_feed base events event_feed type_of_event
+what is  e1   s son  s name	people person children
+what is  e1  doing now	people person profession
+what party was  e1 	government politician party government political_party_tenure party
+ e1  a	business brand owner_s business company_brand_relationship company
+what county is the city of  e1  in	location hud_county_place place
+what is the name of the  e1 	media_common adapted_work adaptations
+what did  e1  do for a living	people person profession
+what county is  e1  in	travel transport_terminus travel_destinations_served travel transportation travel_destination
+where did  e1  study science	people person education education education institution
+what movie is  e1  in	film actor film film performance film
+what is there to do in  e1 	location location contains
+what season did  e1  get shot	tv tv_character appeared_in_tv_program tv regular_tv_appearance series
+what year did  e1  run for president	base politicalconventions presidential_nominee nominated_at
+what year did  e1  run for president	event public_speaker speeches_or_presentations event speech_or_presentation event
+what was the name of  e1  book	book book_subject works
+who was  e1   s parents called	people person parents
+what movies did  e1  win an oscar for	award award_nominee award_nominations award award_nomination nominated_for
+what movies did  e1  win an oscar for	award award_winner awards_won award award_honor honored_for
+where does  e1  begin and end	geography river origin
+what countries do people speak  e1 	language human_language countries_spoken_in
+where to exchange euros in  e1 	location hud_county_place county
+where to exchange euros in  e1 	location capital_of_administrative_division capital_of location administrative_division_capital_relationship administrative_division
+what are the names of  e1  kids	people person children
+who is in the band  e1 	music musical_group member music group_membership member
+what timezone is  e1  gmt	location location time_zones
+what tv show did  e1  play on	tv tv_actor starring_roles tv regular_tv_appearance series
+what timezone is  e1 	location location time_zones
+what timezone is  e1 	location location time_zones
+where does  e1  live	people person nationality
+what form of government was practiced in  e1 	location country form_of_government
+when did the  e1  go to the world series	sports sports_team championships
+who was  e1   s first girlfriend	people person employment_history business employment_tenure company
+what college did  e1  attend	people person education education education institution
+what school did  e1  attend	people person education education education institution
+who was  e1  inspired by	influence influence_node influenced_by
+who was  e1  inspired by	influence influence_node influenced_by
+when did the  e1  win a championship	sports sports_team championships
+what was  e1   s major accomplishments	government politician government_positions_held government government_position_held office_position_or_title
+where is  e1  factory	distilled_spirits distillery region
+where is  e1  factory	people person places_lived people place_lived location
+what language do the speak in  e1 	location country official_language
+where is  e1 	location location containedby
+where is  e1 	organization organization headquarters location mailing_address citytown
+where is  e1 	organization organization headquarters location mailing_address state_province_region
+where did  e1  go to prison	people deceased_person place_of_death
+who  e1  engaged to	people person spouse_s people marriage spouse
+who  e1  engaged to	celebrities celebrity sexual_relationships celebrities romantic_relationship celebrity
+what is  e1  famous for	base argumentmaps innovator original_ideas
+who founded the  e1 	location location events
+what kind of money should i take to  e1 	location country currency_used
+who is  e1  wife	people person spouse_s people marriage spouse
+where do the  e1  play	sports sports_team arena_stadium
+where is  e1  buried	people deceased_person place_of_burial
+who does the author  e1  play in the movie twilight	film actor film film performance character
+when will  e1  compete	olympics olympic_athlete medals_won olympics olympic_medal_honor olympics
+when will  e1  compete	olympics olympic_athlete country olympics olympic_athlete_affiliation olympics
+what years have the  e1  won the superbowl	sports sports_team championships
+what awards has  e1  won	award award_winner awards_won award award_honor award
+who was the president after  e1  died	government us_president vice_president
+what is the best currency to take to  e1  2013	location country currency_used
+what are the countries in the  e1 	base aareas schema administrative_area administrative_children
+what are the countries in the  e1 	location country first_level_divisions
+where did  e1  died	people deceased_person place_of_death
+what to do in  e1  with family	travel travel_destination tourist_attractions
+what is the local language of  e1 	location country official_language
+what city and state was the  e1  established	location location containedby
+what  s the national sport of  e1 	sports sports_team_location teams
+what religion are people in  e1 	location statistical_region religions location religion_percentage religion
+what did  e1  play in	film actor film film performance film
+what countries did  e1  reign over	people person nationality
+what countries did  e1  reign over	royalty monarch kingdom
+where did  e1  go to school	people person education education education institution
+what team does  e1  play for	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+what are dollars called in  e1 	location country currency_formerly_used
+who plays  e1  in family guy	film film_character portrayed_in_films film performance actor
+who plays  e1  in family guy	tv tv_character appeared_in_tv_program tv regular_tv_appearance actor
+what high school did  e1  go to	people person education education education institution
+where does  e1  fly to	aviation airline airports_served aviation airline_airport_presence airport
+what movie did  e1  direct	film director film
+what movie did  e1  direct	film producer film
+what movie did  e1  direct	film writer film
+where did  e1  got shot	people deceased_person place_of_death
+where to visit near  e1 	travel travel_destination tourist_attractions
+who does  e1  have a baby by	people person spouse_s people marriage spouse
+what year did  e1  became king	royalty monarch royal_line
+what year did  e1  became king	base ancientegypt pharaoh dynasty
+who has been married to  e1 	people person spouse_s people marriage spouse
+where do  e1  play	sports sports_team arena_stadium
+who does  e1  play for	sports pro_athlete teams sports sports_team_roster team
+who does  e1  play for	ice_hockey hockey_player former_team_s sports sports_team_roster team
+who does  e1  play for	ice_hockey hockey_player former_team_s ice_hockey hockey_previous_roster_position team
+who does  e1  play for	sports pro_athlete teams ice_hockey hockey_previous_roster_position team
+who does  e1  play for	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+who all has dated  e1 	celebrities celebrity sexual_relationships celebrities romantic_relationship celebrity
+what is the dominant language in  e1 	location country official_language
+what are the main languages of  e1 	location country languages_spoken
+what jobs did  e1  do	people person profession
+who plays  e1  in the looney tunes show	film film_character portrayed_in_films film performance actor
+who plays  e1  in the looney tunes show	tv tv_character appeared_in_tv_program tv regular_tv_appearance actor
+what stadium did the  e1  play in	sports sports_team arena_stadium
+who did  e1  married	people person spouse_s people marriage spouse
+where did  e1  go to college	people person education education education institution
+what did  e1  study at university	people person education education education major_field_of_study
+what school did  e1  go to	user alexander misc murdered_person place_murdered
+what movie did  e1  write	film director film
+what movie did  e1  write	film writer film
+what did  e1  get surgery for	medicine notable_person_with_medical_condition condition
+what did st   e1  do	book book editions
+what was  e1   s religion	people person religion
+what is  e1  known for	people person profession
+who did  e1  marry	people person spouse_s people marriage spouse
+what years did  e1  go to the super bowl	sports sports_award_winner awards sports sports_award season
+what is the money of  e1  called	location country currency_used
+what is the money of  e1  called	location statistical_region minimum_wage measurement_unit recurring_money_value currency
+where are  e1  microwaves made	organization organization headquarters location mailing_address state_province_region
+who was elected president of the  e1 	government governmental_jurisdiction governing_officials government government_position_held office_holder
+what cities does  e1  fly to	aviation airline airports_served aviation airline_airport_presence cities_served
+what time zone is  e1  state	location location time_zones
+who was the  e1  considered to be	fictional_universe person_in_fiction representations_in_fiction
+what currency does  e1  canada use	location statistical_region gdp_nominal measurement_unit dated_money_value currency
+what currency does  e1  canada use	location statistical_region gdp_nominal_per_capita measurement_unit dated_money_value currency
+what currency does ontario  e1  use	location country currency_used
+what currency does ontario  e1  use	location statistical_region places_exported_to location imports_and_exports currency
+what currency does ontario  e1  use	location statistical_region places_imported_from location imports_and_exports currency
+what instrument does  e1 	music group_member instruments_played
+what team did  e1  play for first	sports drafted_athlete drafted sports sports_league_draft_pick team
+where was  e1  when he got shot	people deceased_person place_of_death
+where was  e1  when he got shot	user alexander misc murdered_person place_murdered
+who do  e1  play for	people person employment_history business employment_tenure company
+who do  e1  play for	basketball basketball_player former_teams sports sports_team_roster team
+who do  e1  play for	basketball basketball_player player_statistics basketball basketball_player_stats team
+who do  e1  play for	sports drafted_athlete drafted sports sports_league_draft_pick team
+who do  e1  play for	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+who do  e1  play for	sports pro_athlete teams basketball basketball_historical_roster_position team
+who do  e1  play for	basketball basketball_player former_teams basketball basketball_historical_roster_position team
+where did the  e1  case take place	time event locations
+where did pres  e1  go to college	people person education education education institution
+who was  e1  american revolution	military military_person service military military_service military_force
+who was  e1  american revolution	military military_person service military military_service military_force
+what type of monarchy did  e1  have	location country form_of_government
+when were the  e1  started	sports sports_team founded
+where did the  e1  football team go	user szaijan fantasy_football player nfl_team
+where did  e1  go to college	people person education education education institution
+where does  e1  live	fictional_universe fictional_character places_lived
+where was  e1  born	people person nationality
+which countries are part of the  e1 	base aareas schema administrative_area administrative_parent
+which countries are part of the  e1 	location location containedby
+which countries are part of the  e1 	location administrative_division first_level_division_of
+which countries are part of the  e1 	base aareas schema administrative_area subdivides_place
+what is the postcode for  e1 	location citytown postal_codes
+what is the currency name of  e1 	location country currency_used
+what language does  e1 	location country official_language
+what did  e1  conducted his experiments on	book author works_written
+who did  e1  cheat with	celebrities celebrity sexual_relationships celebrities romantic_relationship celebrity
+who did  e1  cheat with	base popstra celebrity infidelity_perpetrator base popstra infidelity participant
+where is  e1  headquarters	organization organization headquarters location mailing_address citytown
+where is  e1  headquarters	organization organization headquarters location mailing_address citytown
+where is  e1  headquarters	organization organization headquarters location mailing_address citytown
+where is  e1  headquarters	organization organization headquarters location mailing_address state_province_region
+where is  e1  headquarters	organization organization headquarters location mailing_address citytown
+where is  e1  now	sports pro_athlete teams sports sports_team_roster team
+where is  e1  now	american_football football_player current_team sports sports_team_roster team
+where is  e1  now	sports pro_athlete teams american_football football_roster_position team
+where is  e1  now	american_football football_player current_team american_football football_roster_position team
+where is  e1  now	american_football football_player rushing american_football player_rushing_statistics team
+where is  e1  now	american_football football_player passing american_football player_passing_statistics team
+where is  e1  now	american_football football_player games american_football player_game_statistics team
+where is  e1  now	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+what are  e1  countries	user ktrueman default_domain international_organization member_states
+what are  e1  countries	organization membership_organization members organization organization_membership member
+what influenced  e1  work	influence influence_node influenced_by
+what influenced  e1  work	influence influence_node influenced_by
+what time zones are there in the  e1 	location location time_zones
+what language do  e1  people speak	location country languages_spoken
+what countries did  e1  rule	people person nationality
+what countries did  e1  rule	royalty monarch kingdom
+what countries did  e1  rule	government political_appointer appointees government government_position_held jurisdiction_of_office
+who are  e1   s parents	people person parents
+where did  e1  go to school	people person education education education institution
+what college did  e1 	people person education education education institution
+who does  e1  play for 2011	soccer football_player current_team sports sports_team_roster team
+who does  e1  play for 2011	sports pro_athlete teams sports sports_team_roster team
+who does  e1  play for 2011	soccer football_player current_team soccer football_roster_position team
+who does  e1  play for 2011	sports pro_athlete teams soccer football_roster_position team
+what was the purpose of the 1964  e1  resolution	location location events
+what country is the  e1  located in	location administrative_division country
+what country is the  e1  located in	base biblioness bibs_location country
+what country is the  e1  located in	dataworld gardening_hint split_to
+what country is the  e1  located in	government governmental_jurisdiction government_bodies
+where did  e1  die	people deceased_person place_of_death
+where is the  e1  located	location location containedby
+where is the  e1  located	geography river cities
+when did  e1  last win stanley cup	sports sports_team championships
+what school did  e1  attend	people person education education education institution
+what money do they use in  e1 	location country currency_used
+what college did  e1 	people person education education education institution
+what college did  e1 	sports drafted_athlete drafted sports sports_league_draft_pick school
+what are the 2 conferences in the  e1 	organization organization child organization organization_relationship child
+when did  e1  start on in living color	tv tv_actor starring_roles tv regular_tv_appearance seasons
+when did jennifer lopez start on  e1 	tv tv_program regular_cast tv regular_tv_appearance seasons
+what are all the names of  e1  potter	book book_character appears_in_book
+what are all the names of  e1  potter	film film_character portrayed_in_films film performance film
+what does  e1  play in	tv tv_program_creator programs_created
+what does  e1  play in	tv tv_actor starring_roles tv regular_tv_appearance series
+what does  e1  play in	tv tv_producer programs_produced tv tv_producer_term program
+what sort of government does  e1  have	location country form_of_government
+which airport is best to fly into  e1 	location location nearby_airports
+which airport is best to fly into  e1 	travel travel_destination how_to_get_here travel transportation transport_terminus
+where did  e1  go to school	people person education education education institution
+what county is  e1  from	people person nationality
+what county is  e1  from	people person place_of_birth
+what county is  e1  from	music artist origin
+what county is  e1  from	people person places_lived people place_lived location
+what happened to  e1 	base disaster2 injured_person injuries base disaster2 injury type_of_event
+what country is located in the  e1 	location location contains
+what 6 states border  e1 	location location adjoin_s location adjoining_relationship adjoins
+what are the main languages spoken in  e1 	location country official_language
+which airport to fly in  e1 	location location nearby_airports
+where are the ruins of  e1 	exhibitions exhibition_subject exhibitions_created_about_this_subject
+what language people speak in  e1 	location country languages_spoken
+what language people speak in  e1 	location country official_language
+what language do people speak in  e1  wikipedia	location country languages_spoken
+what language do people speak in  e1  wikipedia	location country official_language
+where was princess  e1  raised	fictional_universe fictional_character place_of_birth
+what is the name of the  e1  head coach	american_football football_team current_head_coach
+what is the name of the  e1  head coach	sports sports_team coaches sports sports_team_coach_tenure coach
+when did the  e1  win the championship	sports sports_team championships
+what countries share borders with  e1 	location location adjoin_s location adjoining_relationship adjoins
+what style of art is  e1 	visual_art visual_artist art_forms
+what city was  e1  from	people person place_of_birth
+what did  e1  die of	people deceased_person cause_of_death
+what are the three major rivers in  e1 	location location people_born_here
+what other discoveries did  e1  discover	law inventor inventions
+who started  e1 	organization organization founders
+who started  e1 	organization organization board_members organization organization_board_membership member
+who is  e1  and tamera mowry parents	people person parents
+who is tia and  e1  parents	people person parents
+what political party was  e1 	government politician party government political_party_tenure party
+what would have happened if  e1  had won ww1	base aareas schema administrative_area short_name
+what would have happened if  e1  had won ww1	location country internet_tld
+what kind of government is  e1 	location country form_of_government
+where is the nation of  e1  located	location location containedby
+where is the nation of  e1  located	base locations countries continent
+where is  e1  of greece located	location location partially_containedby
+where is  e1  of greece located	base locations countries continent
+what three countries does  e1  border	location location adjoin_s location adjoining_relationship adjoins
+which countries have  e1  as native language	language human_language main_country
+what position does  e1  play	baseball baseball_player position_s
+what are major exports of the  e1 	location statistical_region major_exports location imports_exports_by_industry industry
+what shows did  e1  star in	tv tv_actor starring_roles tv regular_tv_appearance series
+where did  e1  grow up	people person nationality
+where did  e1  grow up	people person place_of_birth
+where did  e1  grow up	music artist origin
+where did  e1  grow up	people person places_lived people place_lived location
+where is  e1  located	location location containedby
+what currency do i need in  e1 	location country currency_used
+what country did  e1  come from	people person nationality
+who is  e1  married to 2012	people person spouse_s people marriage spouse
+what sport does  e1  compete in	olympics olympic_athlete country olympics olympic_athlete_affiliation sport
+what other countries does  e1  trade with	location statistical_region places_imported_from location imports_and_exports imported_from
+what other countries does  e1  trade with	location statistical_region places_exported_to location imports_and_exports exported_to
+what other countries does  e1  trade with	base sharing sharing_location shared_here base sharing sharing_relationship locations
+what to see in  e1  at night	travel travel_destination tourist_attractions
+where was the battle of  e1 	location location containedby
+during what war did  e1  serve as president	military military_commander military_commands military military_command military_conflict
+who are  e1   s parents names	people person parents
+where is she from  e1 	people person nationality
+where is she from  e1 	music artist origin
+who did  e1  marry	fictional_universe fictional_character married_to fictional_universe marriage_of_fictional_characters spouses
+who did  e1  marry	fictional_universe fictional_character siblings fictional_universe sibling_relationship_of_fictional_characters siblings
+what type of guitar does  e1  play	music group_member instruments_played
+what language they speak in the  e1 	location country official_language
+where is the  e1  located	location location containedby
+what to do with kids in  e1  today	travel travel_destination tourist_attractions
+what money does  e1  use	location country currency_used
+what timezone is  e1  in right now	location location time_zones
+what disease has  e1  got	medicine notable_person_with_medical_condition condition
+what do the  e1  believe	religion religion collective_term_for_adherents
+who will  e1  play for in 2013	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+what language they speak in  e1 	location country official_language
+who owns the  e1 	sports professional_sports_team owner_s
+what county is  e1  in	location hud_county_place county
+what are the basic beliefs of  e1 	religion religion beliefs
+where did  e1  die	people deceased_person place_of_death
+where was the ancient region of  e1 	location location containedby
+who was real housewives  e1  married to	people person spouse_s people marriage spouse
+where is the  e1  located	location location containedby
+who are the  e1  owned by	sports professional_sports_team owner_s
+what inspired  e1  to write poetry	influence influence_node influenced_by
+what languages are there in  e1 	location country languages_spoken
+what languages are there in  e1 	location country official_language
+when was the last time the  e1  had a winning season	sports sports_team championships
+what does  e1  export	location statistical_region major_exports location imports_exports_by_industry industry
+where did  e1  die	people deceased_person place_of_death
+who was the queen of the  e1  tribe	people ethnicity people
+who was the queen of the  e1  tribe	military military_combatant military_commanders military military_command military_commander
+what is the name of the first prophet of  e1 	religion religion founding_figures
+who is married to  e1 	people person spouse_s people marriage spouse
+what language do they speak in  e1 	location country official_language
+what do  e1  religions have in common	religion religion practices
+what did  e1  sing	music artist track
+what did  e1  do before he was president	people person profession
+what did abraham lincoln do before he was  e1 	people person profession
+what sport does  e1  compete in	people person profession
+where is  e1  located	location hud_county_place county
+who did  e1  marry first	people person spouse_s people marriage spouse
+where is  e1  from	people person place_of_birth
+what movies did  e1  appear in	film actor film film performance film
+where does  e1  live now	people person places_lived people place_lived location
+where does  e1  live now	people person spouse_s people marriage location_of_ceremony
+where was the  e1  located	location location containedby
+where was the  e1  located	travel tourist_attraction near_travel_destination
+what date was  e1  inaugurated	base inaugurations inauguration_speaker inauguration
+what invention did  e1  invent	business board_member leader_of organization leadership organization
+what invention did  e1  invent	business board_member leader_of organization leadership organization
+who voiced  e1  in the pilot	film film_character portrayed_in_films film performance actor
+who voiced  e1  in the pilot	tv tv_character appeared_in_tv_program tv regular_tv_appearance actor
+where did  e1  study	people person education education education institution
+what did  e1  do for science	symbols name_source namesakes
+who is the voice of stewie griffin from  e1 	tv tv_program program_creator
+who is the voice of stewie griffin from  e1 	tv tv_program regular_cast tv regular_tv_appearance actor
+who is the voice of stewie griffin from  e1 	award award_winning_work awards_won award award_honor award_winner
+who is the voice of  e1  from family guy	tv tv_character appeared_in_tv_program tv regular_tv_appearance actor
+who is the voice of  e1  from family guy	cvg game_character games cvg game_performance voice_actor
+who is the voice of stewie griffin from  e1 	cvg computer_videogame characters cvg game_performance voice_actor
+who does  e1  dating in real life	people person spouse_s people marriage spouse
+who does  e1  dating in real life	celebrities celebrity sexual_relationships celebrities romantic_relationship celebrity
+when was the musical  e1  written	theater play soundtracks
+what subatomic particles did  e1  discover	base nobelprizes nobel_prize_winner nobel_honor base nobelprizes nobel_honor subject_area
+what films have  e1  been in	film actor film film performance film
+who were  e1   s parents	fictional_universe fictional_character parents
+what country is the name  e1  from	people person nationality
+what country is the name  e1  from	people person nationality
+what country is the name  e1  from	people person nationality
+what exactly did  e1  die from	people deceased_person cause_of_death
+what year did  e1  win the championship	sports sports_team championships
+what kind of government did  e1  have	government politician government_positions_held government government_position_held basic_title
+who was emperor  e1 	user robert roman_empire roman_emperor title
+what did  e1  study in school	people person education education education major_field_of_study
+where did  e1  play baseball	sports pro_athlete teams sports sports_team_roster team
+where did  e1  play baseball	baseball baseball_player former_teams sports sports_team_roster team
+where did  e1  play baseball	sports pro_athlete teams baseball baseball_historical_roster_position team
+where did  e1  play baseball	baseball baseball_player former_teams baseball baseball_historical_roster_position team
+where did  e1  play baseball	baseball baseball_player batting_stats baseball batting_statistics team
+what continent is  e1  part of	location location containedby
+what continent is  e1  part of	base locations countries continent
+what  e1  is south africa part of	base skosbase vocabulary_equivalent_topic equivalent_concept
+who was  e1   s best friend	celebrities celebrity celebrity_friends celebrities friendship friend
+what movies has  e1  been in 2011	award award_nominee award_nominations award award_nomination nominated_for
+what movies has  e1  been in 2011	award award_winner awards_won award award_honor honored_for
+what did  e1  get an oscar for	award award_winner awards_won award award_honor honored_for
+what company did  e1  work for	business board_member leader_of organization leadership organization
+what company did  e1  work for	business board_member leader_of organization leadership organization
+what happened to  e1   s children	people person children
+what year did the  e1  win 100 games	sports sports_team championships
+who was  e1   s mother	people person parents
+where is  e1  located	organization organization headquarters location mailing_address citytown
+what is the  e1  money called	location country currency_used
+what is the government of  e1  today	location country form_of_government
+where is the  e1  located	location location containedby
+where is the  e1  located	organization organization headquarters location mailing_address citytown
+where is the  e1  located	organization organization headquarters location mailing_address state_province_region
+where is the  e1  located	organization organization headquarters location mailing_address country
+what is the capital of  e1  state	base aareas schema administrative_area capital
+what is the capital of  e1  state	location us_state capital
+what is the capital of  e1  state	location administrative_division capital location administrative_division_capital_relationship capital
+what was the  e1 	location country form_of_government
+what college did  e1  go to	people person education education education institution
+who speaks  e1 	language human_language countries_spoken_in
+who was  e1  discovered by	astronomy astronomical_discovery discoverer
+who were the major trade partners of  e1 	location statistical_region places_imported_from location imports_and_exports imported_from
+who were the major trade partners of  e1 	location statistical_region places_exported_to location imports_and_exports exported_to
+who were the major trade partners of  e1 	location statistical_region places_imported_from location imports_and_exports imported_from
+what did  e1  really die of	people deceased_person cause_of_death
+where did  e1  originate	food dish cuisine
+where did  e1  die	people deceased_person place_of_death
+where did  e1  go to high school	people person education education education institution
+who played  e1  on general hospital	tv tv_character appeared_in_tv_program tv regular_tv_appearance actor
+what military school did  e1  attend	people person education education education institution
+who influenced  e1 	influence influence_node influenced_by
+what language do they speak in  e1  wikipedia	location country languages_spoken
+what language do they speak in  e1  wikipedia	location country official_language
+when was blessed  e1  born	people person date_of_birth
+what is the political system in  e1 	location country form_of_government
+what is the currency in  e1  2012	location country currency_used
+where is the nation of  e1 	location location containedby
+what are the greek  e1 	symbols name_source namesakes
+what countries speak  e1  primarily	language human_language main_country
+what states does the  e1  touch	location location partially_containedby
+what is in  e1  england	travel travel_destination tourist_attractions
+what state is  e1  located	organization organization headquarters location mailing_address state_province_region
+what state is  e1  located	location location containedby
+what state is  e1  located	organization organization headquarters location mailing_address state_province_region
+where was  e1  when he died	people deceased_person place_of_death
+what money do  e1  use	location country currency_used
+what is the time zone in  e1 	location location time_zones
+what killed  e1 	people deceased_person cause_of_death
+what kind of government did the  e1  empire have	location country form_of_government
+what is the religion of  e1  people	location statistical_region religions location religion_percentage religion
+what is the religion of  e1  people	people person religion
+what is  e1 	geography mountain mountain_type
+what airport is closest to sandals grande in  e1 	location location nearby_airports
+who was the first  e1  president	government governmental_jurisdiction governing_officials government government_position_held appointed_by
+what language does people in  e1  speak	location country languages_spoken
+what language does people in  e1  speak	location country official_language
+what type of language does  e1  speak	location country languages_spoken
+who is  e1 	people person profession
+what does  e1  do	people person profession
+in which province is  e1 	location location containedby
+where was  e1  standing when he was shot	people deceased_person place_of_death
+where was  e1  standing when he was shot	people person places_lived people place_lived location
+where was  e1  standing when he was shot	people person places_lived people place_lived location
+what state did  e1  represent	people person places_lived people place_lived location
+what state did  e1  represent	government politician government_positions_held government government_position_held district_represented
+what type of art is  e1  famous for	visual_art visual_artist art_forms
+what to do in  e1 	location location contains
+who plays princess  e1  in star wars	tv tv_character appeared_in_tv_program tv regular_tv_appearance actor
+who was  e1 	people person profession
+what are the four nations of the  e1 	base aareas schema administrative_area administrative_children
+what are the four nations of the  e1 	location country first_level_divisions
+what are the four nations of the  e1 	location location adjoin_s location adjoining_relationship adjoins
+who was  e1  married to	people person spouse_s people marriage spouse
+where is  e1  hometown	people person place_of_birth
+what disease did  e1 	medicine notable_person_with_medical_condition condition
+what disease did  e1 	base qualia disabled_person disability base qualia disability type_of_disability
+what is the name of money in  e1 	location country currency_used
+what year did  e1  win championship	sports sports_team championships
+what is the  e1  mascot	sports sports_team team_mascot
+what type of government did  e1  have during the glorious revolution	location country form_of_government
+where was  e1  an international environmental organization founded	organization organization place_founded
+what does  e1  that mean	tv tv_character appeared_in_tv_program tv regular_tv_appearance series
+what was the first name of the  e1 	sports sports_team previously_known_as
+who was the first leader of the  e1 	organization organization founders
+who is the  e1  football coach	american_football football_team current_head_coach
+when did  e1  admit women	location location containedby
+where was the battle of  e1  held	time event locations
+what was  e1  known for	people person profession
+which is faster amd dual core or  e1  dual core	book book_subject works
+where did  e1  go to college	people person education education education institution
+who are the  e1 	sports sports_team sport
+where does lala  e1  live	people person places_lived people place_lived location
+what currency do they accept in  e1 	location country currency_used
+what river did  e1  sail up	symbols name_source namesakes
+what currency is used in  e1  2012	location country currency_used
+what do they speak in  e1 	location country languages_spoken
+who did  e1  drive for	people person employment_history business employment_tenure company
+where is the best place to vacation in the  e1 	location country capital
+where was  e1  born	people person place_of_birth
+what position does  e1  play	american_football football_player position_s
+what position does  e1  play	sports pro_athlete teams sports sports_team_roster position
+what position does  e1  play	american_football football_player current_team sports sports_team_roster position
+what position does  e1  play	american_football football_player former_teams sports sports_team_roster position
+what position does  e1  play	sports pro_athlete teams american_football football_roster_position position
+what position does  e1  play	american_football football_player current_team american_football football_roster_position position
+what position does  e1  play	american_football football_player former_teams american_football football_historical_roster_position position_s
+what position does  e1  play	sports pro_athlete teams american_football football_historical_roster_position position_s
+what to see and do in  e1 	travel travel_destination tourist_attractions
+where did  e1  grew up	people person place_of_birth
+where did  e1  grew up	music artist origin
+what state is  e1  from	government politician government_positions_held government government_position_held district_represented
+what countries does  e1  reign	government politician government_positions_held government government_position_held office_position_or_title
+what countries does  e1  reign	royalty noble_person titles royalty noble_title_tenure noble_title
+when did the  e1  shooting take place	location location events
+what is  e1  names	music musical_group member music group_membership member
+what is  e1  names	people person sibling_s people sibling_relationship sibling
+what is  e1  names	base popstra celebrity insult_victim base popstra public_insult victim
+what is  e1  names	people person sibling_s people sibling_relationship sibling
+what is  e1  names	base popstra celebrity insult_victim base popstra public_insult victim
+what is  e1  names	people person sibling_s people sibling_relationship sibling
+what is  e1  names	base popstra celebrity insult_victim base popstra public_insult victim
+what art movements was  e1  involved in	visual_art visual_artist associated_periods_or_movements
+what are some famous tourist attractions in  e1 	travel travel_destination tourist_attractions
+who  s  e1 	people person profession
+what type of government system does  e1  have	location country form_of_government
+what countries did  e1  become	base datedlocationtest dated_location_test broke_up_into base datedlocationtest dated_location_break_up new_locations
+what songs did  e1  write	music composer compositions
+what songs did  e1  write	music lyricist lyrics_written
+what songs did  e1  write	award award_nominee award_nominations award award_nomination nominated_for
+what songs did  e1  write	award award_winner awards_won award award_honor honored_for
+what did  e1  died from	people deceased_person cause_of_death
+where was  e1  elected from	people person places_lived people place_lived location
+who does  e1  play for in the nba	sports pro_athlete teams basketball basketball_roster_position team
+who does  e1  play for in the nba	basketball basketball_player team basketball basketball_roster_position team
+who does  e1  play for in the nba	basketball basketball_player team sports sports_team_roster team
+who does  e1  play for in the nba	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+where  e1  grew up	people person place_of_birth
+where did  e1  go to jail	base prison prisoner imprisoned base prison imprisonment prison
+what type of music did  e1  play	music artist genre
+what do you call money in  e1 	location country currency_used
+what team did  e1  play for in college	american_football football_player former_teams sports sports_team_roster team
+what team did  e1  play for in college	sports pro_athlete teams sports sports_team_roster team
+what team did  e1  play for in college	american_football football_player former_teams american_football football_historical_roster_position team
+what team did  e1  play for in college	sports pro_athlete teams american_football football_historical_roster_position team
+what airport in  e1 	location location nearby_airports
+what nationality was  e1 	people person nationality
+where did  e1  live	people person places_lived people place_lived location
+what ball does  e1  play	sports pro_athlete sports_played_professionally sports pro_sports_played sport
+where do most of the people live in  e1 	location country capital
+in what country do they speak  e1 	location administrative_division country
+in what country do they speak  e1 	base aareas schema administrative_area administrative_parent
+in what country do they speak  e1 	location location containedby
+in what country do they speak  e1 	location administrative_division first_level_division_of
+in what country do they speak  e1 	language human_language main_country
+in what country do they speak  e1 	language human_language countries_spoken_in
+where is  e1  at	location location containedby
+what religions are in  e1 	location statistical_region religions location religion_percentage religion
+in what country is  e1 	location administrative_division country
+in what country is  e1 	location location containedby
+in what country is  e1 	base biblioness bibs_location country
+in what country is  e1 	location administrative_division second_level_division_of
+what are the most common religions in the  e1 	location statistical_region religions location religion_percentage religion
+what did  e1  go to college for	people person education education education major_field_of_study
+where did sir  e1  come from	award ranked_item appears_in_ranked_lists award ranking list
+who did  e1  play college football 4	people person education education education institution
+who plays  e1 	tv tv_character appeared_in_tv_program tv regular_tv_appearance actor
+when did the  e1  win the championship	sports sports_team championships
+where is  e1 	location location containedby
+where is  e1 	geography mountain mountain_range
+who created the character of  e1 	fictional_universe fictional_character character_created_by
+what are the countries and capitals of  e1 	location location contains
+where is  e1  somalia	location location contains
+where did  e1  play in college	people person education education education institution
+what is  e1  real name	people person parents
+what countries fall in  e1 	location location contains
+what did king  e1  died from	people deceased_person cause_of_death
+what did  e1  accomplish	symbols name_source namesakes
+who did  e1  play for	baseball baseball_player batting_stats baseball batting_statistics team
+who does the  e1  worship	religion religion deities
+where is  e1  buried	people deceased_person place_of_death
+where is  e1  buried	people deceased_person place_of_burial
+what language do people speak in  e1 	location country languages_spoken
+what language do people speak in  e1 	location country official_language
+what is the  e1  starting lineup	sports sports_team roster basketball basketball_roster_position player
+what is the  e1  starting lineup	basketball basketball_team roster basketball basketball_roster_position player
+what is the  e1  starting lineup	basketball basketball_team roster sports sports_team_roster player
+what to see and do in  e1  ireland	travel travel_destination tourist_attractions
+what year did  e1  get drafted	sports drafted_athlete drafted sports sports_league_draft_pick draft
+what are the names of  e1  children	people person children
+what book did  e1  write	book author book_editions_published
+what religions are found in  e1 	location statistical_region religions location religion_percentage religion
+what college did  e1 	people person education education education institution
+where is the  e1  headquarters	organization organization headquarters location mailing_address citytown
+who does  e1  play for	sports pro_athlete teams sports sports_team_roster team
+who does  e1  play for	american_football football_player current_team sports sports_team_roster team
+who does  e1  play for	sports pro_athlete teams american_football football_roster_position team
+who does  e1  play for	american_football football_player current_team american_football football_roster_position team
+who does  e1  play for	american_football football_player rushing american_football player_rushing_statistics team
+who does  e1  play for	american_football football_player passing american_football player_passing_statistics team
+who does  e1  play for	american_football football_player games american_football player_game_statistics team
+who does  e1  play for	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+what is  e1  current system of government	location country form_of_government
+what is  e1  trained in	people person profession
+what caused the  e1  currency crisis	education field_of_study journals_in_this_discipline
+which countries does  e1  border	location location adjoin_s location adjoining_relationship adjoins
+what does  e1  produce	award award_nominee award_nominations award award_nomination nominated_for
+what did  e1  die of	people deceased_person cause_of_death
+what was  e1   s father  s name	people person parents
+where is  e1  buried	people deceased_person place_of_death
+what language do  e1  people speak	location country official_language
+what  e1  kids names	people person children
+where is  e1  in the map	base militaryinfiction location_in_fiction contains
+where is  e1  in the map	location hud_county_place place
+where is  e1  in the map	base biblioness bibs_topic is_really
+where is  e1  in the map	base biblioness bibs_topic subsumes
+where is  e1  in the map	user narphorium default_domain base_equivalent_location base
+what did  e1  die with	people deceased_person cause_of_death
+what teams did  e1 	sports sports_award_winner awards sports sports_award team
+what teams did  e1 	basketball basketball_player player_statistics basketball basketball_player_stats team
+when was  e1  elected president	base politicalconventions presidential_nominee nominated_at
+when was  e1  elected president	base politicalconventions primary_candidate pres_delegate_vote_tally base politicalconventions pres_delegate_vote_tally convention
+when was bill clinton elected  e1 	base politicalconventions presidential_nominee nominated_at
+when was bill clinton elected  e1 	base politicalconventions primary_candidate pres_delegate_vote_tally base politicalconventions pres_delegate_vote_tally convention
+where did  e1  live	people person nationality
+when  e1  got drafted	sports drafted_athlete drafted sports sports_league_draft_pick draft
+what kind of money do the  e1  use	location country currency_used
+who does  e1  play 4	user szaijan fantasy_football player nfl_team
+who does  e1  play 4	american_football football_player former_teams sports sports_team_roster team
+who does  e1  play 4	sports pro_athlete teams sports sports_team_roster team
+who does  e1  play 4	american_football football_player former_teams american_football football_historical_roster_position team
+who does  e1  play 4	sports pro_athlete teams american_football football_historical_roster_position team
+who does  e1  play 4	american_football football_player rushing american_football player_rushing_statistics team
+who does  e1  play 4	american_football football_player receiving american_football player_receiving_statistics team
+who does  e1  play 4	american_football football_player games american_football player_game_statistics team
+who does  e1  play 4	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+how many teams are there in the  e1  football	sports sports_league teams sports sports_league_participation team
+what type of currency should i take to  e1 	location country currency_used
+what did  e1  die of	people deceased_person cause_of_death
+what religion was  e1 	people person religion
+what religion was  e1 	base popstra celebrity religion base popstra religion_choice religion
+what religion was  e1 	people person religion
+what style of art does  e1  do	visual_art visual_artist associated_periods_or_movements
+what movies did  e1  do	award award_nominee award_nominations award award_nomination nominated_for
+what movies did  e1  do	award award_winner awards_won award award_honor honored_for
+what county is  e1 	location hud_county_place county
+what county is  e1 	location capital_of_administrative_division capital_of location administrative_division_capital_relationship administrative_division
+what type of government and economic system does the  e1  have	location country form_of_government
+who is  e1 	people person profession
+what type of government does  e1  have today	location country form_of_government
+what did  e1  discovered in 1819	chemistry element_discoverer discovered
+what  e1  name her daughter	people person children
+what kind of government does  e1  have today	location country form_of_government
+where did  e1  die	people deceased_person place_of_death
+who played  e1  in star wars episode 4	film film_character portrayed_in_films film performance actor
+who played  e1  in star wars episode 4	tv tv_character appeared_in_tv_program tv regular_tv_appearance actor
+what movies has  e1 	film actor film film performance film
+where does  e1  play	sports pro_athlete teams sports sports_team_roster team
+where does  e1  play	american_football football_player current_team sports sports_team_roster team
+where does  e1  play	sports pro_athlete teams american_football football_roster_position team
+where does  e1  play	american_football football_player current_team american_football football_roster_position team
+where does  e1  play	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+where did  e1  originate	location location containedby
+where did  e1  originate	base locations countries continent
+where was  e1  2012 held	location location containedby
+where does the  e1  play football	sports sports_team arena_stadium
+what year did  e1  come into the nba	sports pro_athlete career_start
+where are you if you re in  e1 	location administrative_division country
+where are you if you re in  e1 	base aareas schema administrative_area administrative_parent
+where are you if you re in  e1 	location location containedby
+where are you if you re in  e1 	base biblioness bibs_location country
+where are you if you re in  e1 	base aareas schema administrative_area subdivides_place
+where are you if you re in  e1 	location location containedby
+what city was  e1  born in	people person place_of_birth
+what city was  e1  born in	music artist origin
+which country does  e1  border 2 the north	location location adjoin_s location adjoining_relationship adjoins
+which country does  e1  border 2 the north	location statistical_region places_imported_from location imports_and_exports imported_from
+who played  e1  friend in terminator 2	film film_character portrayed_in_films film performance actor
+what is the current time in nigeria  e1 	location location time_zones
+what shows did  e1  produce	tv tv_producer programs_produced tv tv_producer_term program
+what state was  e1  gas founded	organization organization headquarters location mailing_address state_province_region
+what state was  e1  gas founded	organization organization headquarters location mailing_address state_province_region
+what is the official language of  e1  and 3 other dialects	location country official_language
+what is the official language of  e1  and 3 other dialects	location country official_language
+what episode does  e1  fade away	film film_character portrayed_in_films film performance film
+what episode does  e1  fade away	film film_character portrayed_in_films_dubbed film dubbing_performance film
+what is  e1  time zone	location location time_zones
+what do people in the  e1  speak	location country official_language
+where did  e1  get his start	people person place_of_birth
+who was  e1 	people person profession
+what are all the things  e1  invented	law inventor inventions
+what does  e1  speak	location country official_language
+what is  e1   s nationality	people person nationality
+what is  e1   s nationality	music artist origin
+who is playing  e1 	film film_character portrayed_in_films film performance actor
+what position did  e1  serve in the constitutional convention	government politician government_positions_held government government_position_held office_position_or_title
+where is the 2012  e1  basketball tournament	book author works_written
+where did  e1  play	basketball basketball_player position_s
+where did  e1  play	basketball basketball_player team basketball basketball_roster_position position
+where did  e1  play	sports pro_athlete teams basketball basketball_roster_position position
+where did  e1  play	basketball basketball_player team sports sports_team_roster position
+where did  e1  play	sports pro_athlete teams sports sports_team_roster position
+where does the  e1  begin	geography river origin
+where did  e1  come from	people person nationality
+where did  e1  come from	people person place_of_birth
+where did  e1  come from	music artist origin
+where did  e1  come from	people person places_lived people place_lived location
+who does  e1  drive for now	business sponsored_recipient sponsorship business sponsorship sponsored_by
+what years did the  e1  win the championship	sports sports_team championships
+what is the time zone in  e1  now	location location time_zones
+what is the time zone in  e1  now	location location time_zones
+what does  e1  do now	people person profession
+what state did  e1  live in	people person places_lived people place_lived location
+where are  e1  located	location location containedby
+who is  e1 	fictional_universe fictional_character appears_in_these_fictional_universes
+who is  e1 	base pinball pinball_machine_basis pinball_machines
+where is the  e1 	location location containedby
+where is the  e1 	travel tourist_attraction near_travel_destination
+what do  e1  call their money	location country currency_used
+what was the name of  e1  plane	aviation aircraft_manufacturer aircraft_models_made
+where is located  e1 	location location containedby
+where is located  e1 	organization organization headquarters location mailing_address citytown
+who is  e1  snl	people person profession
+what language do they  e1 	location country official_language
+what did  e1  do	people person profession
+what team did  e1  play for	baseball baseball_player batting_stats baseball batting_statistics team
+what was  e1  nationality	people person nationality
+what was  e1  famous for	people person profession
+where was  e1  from	people person nationality
+where was  e1  from	people person employment_history business employment_tenure company
+where was  e1  from	government politician government_positions_held government government_position_held jurisdiction_of_office
+where was  e1  from	government political_appointer appointees government government_position_held jurisdiction_of_office
+where was  e1  from	military military_commander military_commands military military_command military_combatant
+where do  e1  come from	organization organization headquarters location mailing_address citytown
+what team is  e1  on	basketball basketball_player team basketball basketball_roster_position team
+what team is  e1  on	sports pro_athlete teams basketball basketball_roster_position team
+what team is  e1  on	basketball basketball_player team sports sports_team_roster team
+what team is  e1  on	sports pro_athlete teams sports sports_team_roster team
+what team is  e1  on	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+what language is spoken in  e1 	location country languages_spoken
+what language is spoken in  e1 	location country official_language
+who is  e1  married too	people person spouse_s people marriage spouse
+what do  e1  speak	location country languages_spoken
+what do  e1  speak	location country official_language
+what movies did  e1  play in	film person_or_entity_appearing_in_film films film personal_film_appearance film
+who is  e1  dad	people person parents
+what continent does  e1  belong to	base locations countries continent
+what is the capital city of  e1 	location country capital
+where is  e1   s home	people deceased_person place_of_burial
+where is  e1   s home	people person places_lived people place_lived location
+what is  e1  in	award award_nominee award_nominations award award_nomination nominated_for
+what is  e1  in	tv tv_actor starring_roles tv regular_tv_appearance series
+what is the capital of  e1  in 2010	location country capital
+what is  e1  of spain in 2010	base arthist helynevek helynev
+what is  e1  of spain in 2010	base aareas schema administrative_area administrative_parent
+what is  e1  of spain in 2010	government political_district representatives government government_position_held jurisdiction_of_office
+what is  e1  of spain in 2010	location capital_of_administrative_division capital_of location administrative_division_capital_relationship administrative_division
+who killed  e1 	user alexander misc murdered_person murdered_by
+where is the  e1  located	location location containedby
+where is the  e1  located	organization organization headquarters location mailing_address citytown
+where is the  e1  located	organization organization headquarters location mailing_address state_province_region
+what did  e1  die off	people deceased_person cause_of_death
+what main language do they speak in  e1 	location country languages_spoken
+what main language do they speak in  e1 	location country official_language
+where does  e1  live	people person place_of_birth
+where does  e1  live	people person places_lived people place_lived location
+what was  e1  first name	sports sports_team previously_known_as
+where did  e1  started his career	people deceased_person place_of_death
+where did  e1  started his career	music artist origin
+where did  e1  started his career	people person places_lived people place_lived location
+what happened  e1 	people person profession
+what jobs did  e1  have	people person profession
+where does  e1  operate	organization organization headquarters location mailing_address citytown
+where in the bible does it talk about  e1 	book book_subject works
+what does  e1  play in	award award_nominee award_nominations award award_nomination nominated_for
+what does  e1  play in	film actor film film performance film
+what is the jurisdiction of the  e1  supreme court	base natlang abbreviated_topic complete_name
+what is the jurisdiction of the  e1  supreme court	dataworld gardening_hint split_to
+what is the jurisdiction of the  e1 	government governmental_body jurisdiction
+what is the jurisdiction of the  e1 	law court jurisdiction
+what voice does  e1  do on the simpsons	tv tv_actor starring_roles tv regular_tv_appearance character
+what time zone is the  e1  in right now	location location time_zones
+what time zone is the  e1  in right now	location location time_zones
+what position does  e1 	basketball basketball_player position_s
+what position does  e1 	sports pro_athlete teams basketball basketball_roster_position position
+what position does  e1 	basketball basketball_player team basketball basketball_roster_position position
+what position does  e1 	sports pro_athlete teams sports sports_team_roster position
+what position does  e1 	basketball basketball_player team sports sports_team_roster position
+what branch is made up of the  e1 	government governmental_body sessions
+where did  e1  battle take place	time event locations
+what year was the  e1  last world series	sports sports_team championships
+who is playing  e1  in the avengers movie	film film_character portrayed_in_films film performance actor
+what country speak  e1  as native language	language human_language main_country
+what movie did  e1  play in	film actor film film performance film
+what religion was  e1 	people person religion
+who all has  e1  played for	sports pro_athlete teams sports sports_team_roster team
+who all has  e1  played for	basketball basketball_player former_teams sports sports_team_roster team
+who all has  e1  played for	basketball basketball_player player_statistics basketball basketball_player_stats team
+who all has  e1  played for	sports pro_athlete teams basketball basketball_historical_roster_position team
+who all has  e1  played for	basketball basketball_player former_teams basketball basketball_historical_roster_position team
+where is headquarters of  e1 	organization organization headquarters location mailing_address state_province_region
+where is the  e1  located	location location containedby
+who invented  e1 	organization organization founders
+who invented  e1 	organization organization leadership organization leadership person
+where did  e1  come from	people person place_of_birth
+where did  e1  grow up	people person places_lived people place_lived location
+when was the  e1  flag designed	language human_language writing_system
+where did  e1  terriers come from	location administrative_division country
+where did  e1  terriers come from	base biblioness bibs_location country
+where did boston  e1  come from	tv tv_program country_of_origin
+what makes  e1  smart	people person education education education major_field_of_study
+who played  e1  in spy kids 4	film film_character portrayed_in_films film performance actor
+what year did the  e1  start	sports sports_team founded
+where did  e1  grow up	people person places_lived people place_lived location
+who runs the  e1  now	boats ship owners boats ship_ownership owner
+where did  e1  die	people deceased_person place_of_death
+where was  e1  raised	people person place_of_birth
+where was  e1  raised	music artist origin
+what countries are in the  e1  region	location location partially_containedby
+when was the last time the  e1  won a world series	sports sports_team championships
+what airport do you fly into for  e1 	location location nearby_airports
+what airport do you fly into for  e1 	travel travel_destination how_to_get_here travel transportation mode_of_transportation
+what country was  e1  from	people person nationality
+what year did  e1  play	baseball baseball_player batting_stats baseball batting_statistics season
+where does  e1  live	people person places_lived people place_lived location
+what has  e1  been in	film actor film film performance film
+what are the major imports of the  e1 	location statistical_region major_imports location imports_exports_by_industry industry
+what are the team colors for the  e1 	sports sports_team colors
+what is the current government system in  e1 	location country form_of_government
+what did  e1  die of	people deceased_person cause_of_death
+what is  e1  italy	base aareas schema administrative_area administrative_area_type
+what is calabria  e1 	base aareas schema administrative_area subdividing_type
+what are the major religions practiced in  e1 	location statistical_region religions location religion_percentage religion
+what are the major religions practiced in  e1 	people person religion
+what does  e1  manufacturer	food beer_country_region beers_from_here
+what 4 countries make up  e1 	location location contains
+where did  e1  live in nyc	people person place_of_birth
+how many languages are there in the  e1 	location country languages_spoken
+who did  e1  marry	people person spouse_s people marriage spouse
+who was  e1  in crazy stupid love	film actor film film performance character
+where is the  e1  located	organization organization headquarters location mailing_address state_province_region
+where is the  e1  located	location location containedby
+where is the  e1  located	organization organization headquarters location mailing_address state_province_region
+what team does  e1  play for in 2011	sports pro_athlete teams basketball basketball_roster_position team
+what team does  e1  play for in 2011	basketball basketball_player team basketball basketball_roster_position team
+what team does  e1  play for in 2011	basketball basketball_player team sports sports_team_roster team
+what team does  e1  play for in 2011	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+where did  e1  come from	user robert us_congress us_representative state
+who was  e1  in soul surfer	film actor film film performance character
+who plays  e1  in family guy	film film_character portrayed_in_films film performance actor
+who plays  e1  in family guy	tv tv_character appeared_in_tv_program tv regular_tv_appearance actor
+what did  e1  write	tv tv_actor starring_roles tv regular_tv_appearance series
+where does  e1  live map	people person places_lived people place_lived location
+who does the  e1  worship	religion religion deities
+who was married to  e1 	people person spouse_s people marriage spouse
+what is  e1  named for	astronomy celestial_object category
+who did  e1  for	american_football football_coach current_team_head_coached
+where are the nuclear plants in  e1 	user skud nuclear_weapons nuclear_power nuclear_test_series
+what years have the  e1  won the world series	sports sports_team championships
+what did  e1  have surgery for	people deceased_person cause_of_death
+what did  e1  have surgery for	medicine notable_person_with_medical_condition condition
+who does  e1  play for	american_football football_player former_teams sports sports_team_roster team
+who does  e1  play for	sports pro_athlete teams sports sports_team_roster team
+who does  e1  play for	american_football football_player former_teams american_football football_historical_roster_position team
+who does  e1  play for	sports pro_athlete teams american_football football_historical_roster_position team
+what  e1  do catholics believe in	fictional_universe person_in_fiction representations_in_fiction
+what movies have  e1  produced	film actor film film performance film
+where did  e1  go to high school	people person education education education institution
+what year did the  e1  go to the world series	sports sports_team championships
+who owns the  e1 	sports professional_sports_team owner_s
+what language do  e1  speak	people ethnicity languages_spoken
+what inspired  e1 	influence influence_node influenced_by
+what battle did  e1  surrender in ww2	location country capital
+who was the  e1  coach in 2011	american_football football_team historical_coaching_staff american_football football_historical_coach_position coach
+where does  e1  live	people person nationality
+what city is fc  e1  04 in	sports sports_team location
+what city is fc  e1  04 in	organization organization headquarters location mailing_address citytown
+what system of government is used in  e1 	location country form_of_government
+where did  e1  come from	people person nationality
+what airport is close to  e1 	location location nearby_airports
+who did the  e1  draft in 2011	sports professional_sports_team draft_picks sports sports_league_draft_pick player
+where did  e1  perform most of his plays	architecture architect structures_designed
+what group is  e1  in	music group_member membership music group_membership group
+what college did  e1  go to	people person education education education institution
+where was president  e1  from	people person places_lived people place_lived location
+what did  e1  compose	music lyricist lyrics_written
+what did  e1  compose	opera librettist libretti
+who does  e1  play for in 2009	sports pro_athlete teams sports sports_team_roster team
+who does  e1  play for in 2009	american_football football_player current_team sports sports_team_roster team
+who does  e1  play for in 2009	sports pro_athlete teams american_football football_roster_position team
+who does  e1  play for in 2009	american_football football_player current_team american_football football_roster_position team
+who does  e1  play for in 2009	sports drafted_athlete drafted sports sports_league_draft_pick team
+who does  e1  play for in 2009	american_football football_player receiving american_football player_receiving_statistics team
+who does  e1  play for in 2009	american_football football_player games american_football player_game_statistics team
+who does  e1  play for in 2009	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+what years did  e1  play	sports sports_award_winner awards sports sports_award season
+what years did  e1  play	baseball baseball_player batting_stats baseball batting_statistics season
+who played  e1 	film film_character portrayed_in_films film performance actor
+what clubs has  e1  played for	soccer football_player current_team sports sports_team_roster team
+what clubs has  e1  played for	sports pro_athlete teams sports sports_team_roster team
+what clubs has  e1  played for	soccer football_player current_team soccer football_roster_position team
+what clubs has  e1  played for	sports pro_athlete teams soccer football_roster_position team
+what team does  e1  play for 2011	sports pro_athlete teams basketball basketball_roster_position team
+what team does  e1  play for 2011	basketball basketball_player team basketball basketball_roster_position team
+what team does  e1  play for 2011	sports pro_athlete teams sports sports_team_roster team
+what team does  e1  play for 2011	basketball basketball_player team sports sports_team_roster team
+what team does  e1  play for 2011	basketball basketball_player player_statistics basketball basketball_player_stats team
+what highschool did  e1  go to	people person education education education institution
+who owns  e1 	organization organization parent organization organization_relationship parent
+who did  e1  marry	people person spouse_s people marriage spouse
+who did  e1  marry	celebrities celebrity sexual_relationships celebrities romantic_relationship celebrity
+where is the  e1 	location location containedby
+where is the  e1 	organization organization headquarters location mailing_address citytown
+where is the  e1 	organization organization headquarters location mailing_address state_province_region
+where is the  e1 	sports sports_team location
+what has  e1  been in	film actor film film performance film
+where do  e1  live	people person place_of_birth
+where do  e1  live	people person places_lived people place_lived location
+where is lake waynoka  e1 	location administrative_division country
+where is lake waynoka  e1 	base aareas schema administrative_area administrative_parent
+where is lake waynoka  e1 	base biblioness bibs_location country
+where is lake waynoka  e1 	location administrative_division first_level_division_of
+where is lake waynoka  e1 	base locations states_and_provences country
+where is lake waynoka  e1 	government political_district representatives government government_position_held jurisdiction_of_office
+who did  e1  sign with	sports pro_athlete teams basketball basketball_roster_position team
+who did  e1  sign with	basketball basketball_player team basketball basketball_roster_position team
+who did  e1  sign with	sports pro_athlete teams sports sports_team_roster team
+who did  e1  sign with	basketball basketball_player team sports sports_team_roster team
+who did  e1  sign with	basketball basketball_player former_teams sports sports_team_roster team
+who did  e1  sign with	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+who did  e1  sign with	basketball basketball_player former_teams basketball basketball_historical_roster_position team
+who did  e1  sign with	sports pro_athlete teams basketball basketball_historical_roster_position team
+who will sponsor  e1  in 2011	business sponsored_recipient sponsorship business sponsorship sponsored_by
+where  e1  originate	organization organization phone_number common phone_number service_location
+where  e1  originate	base schemastaging organization_extra phone_number base schemastaging phone_sandbox service_location
+who played  e1 	film film_character portrayed_in_films film performance actor
+what is 2pm est in  e1 	location location time_zones
+where are the  e1  located	location location containedby
+where are the  e1  located	location location containedby
+when does  e1  race tonight	olympics olympic_athlete country olympics olympic_athlete_affiliation sport
+when does  e1  race tonight	sports pro_athlete sports_played_professionally sports pro_sports_played sport
+who were  e1   s brothers and sisters	fictional_universe fictional_character romantically_involved_with fictional_universe romantic_involvement partner
+who were  e1   s brothers and sisters	fictional_universe fictional_character siblings fictional_universe sibling_relationship_of_fictional_characters siblings
+what date did the  e1  win the world series	sports sports_team championships
+on which continent is the  e1  located	location location partially_containedby
+on which continent is the  e1  located	base locations countries continent
+on which continent is the  e1  located	location location primarily_containedby
+where is  e1  on a world map	location location containedby
+where is  e1  on a world map	base locations countries continent
+what is the main language of  e1 	location country languages_spoken
+what is the main language of  e1 	location country official_language
+what college did  e1 	people person education education education institution
+what did  e1  die of	people deceased_person cause_of_death
+where did  e1  live in	people person places_lived people place_lived location
+where is made  e1  car	organization organization headquarters location mailing_address citytown
+what groups was  e1  involved in	government politician party government political_party_tenure party
+what college did  e1  go to	people person education education education institution
+what kind of language do they speak in  e1 	location country languages_spoken
+what kind of language do they speak in  e1 	location country official_language
+what to see in  e1  downtown	travel travel_destination tourist_attractions
+what kind of money does the  e1  use	location country currency_used
+what did  e1  make	law inventor inventions
+what movies has  e1  been in	film actor film film performance film
+who was  e1 	people person profession
+who were ulysses s grant and  e1 	military military_person service military military_service rank
+with which countries does  e1  trade	location statistical_region places_exported_to location imports_and_exports exported_to
+what kind of language do they speak in  e1 	location country official_language
+what kind of language do they speak in  e1 	location country official_language
+what office does  e1  hold	base obamabase possible_cabinet_member cabinet_position
+what office does  e1  hold	base obamabase cabinet_member cabinet_position
+what office does  e1  hold	government politician government_positions_held government government_position_held office_position_or_title
+what office does  e1  hold	people appointee position people appointment appointed_role
+what office does  e1  hold	base government2 appointed_official appointments people appointment appointed_role
+where does  e1  language come from	language human_language writing_system
+what are the major religions in  e1 	location statistical_region religions location religion_percentage religion
+where did  e1  go to school	people person education education education institution
+what type of guitar does  e1  play	music guitarist guitars_played
+what is the zip code for  e1 	location citytown postal_codes
+what continent is the  e1  located in	location location partially_containedby
+what continent is the  e1  located in	base locations countries continent
+what continent is the  e1  located in	location location primarily_containedby
+what is the currency of  e1  called	location country currency_used
+what is the currency of  e1  called	location statistical_region minimum_wage measurement_unit recurring_money_value currency
+where was  e1  born	people person place_of_birth
+where was  e1  born	people person places_lived people place_lived location
+what are the 3 official languages of  e1 	location country official_language
+what type of government does  e1  currently have	location country form_of_government
+which countries do  e1  border	location location adjoin_s location adjoining_relationship adjoins
+what county is  e1  located in	location hud_county_place county
+what county is  e1  located in	location capital_of_administrative_division capital_of location administrative_division_capital_relationship administrative_division
+what county is  e1  located in	location location containedby
+what county is  e1  located in	location location containedby
+where are they now  e1 	people person place_of_birth
+where are they now  e1 	people person places_lived people place_lived location
+who played  e1  on the tv show	tv tv_program program_creator
+who played  e1  on the tv show	tv tv_program tv_producer tv tv_producer_term producer
+who was the vice president when  e1  was in office	government us_president vice_president
+which countries does  e1  export to	location statistical_region places_exported_to location imports_and_exports exported_to
+what to do in downtown  e1 	location location contains
+what other cars does  e1  make	business consumer_company brands business company_brand_relationship brand
+what other cars does  e1  make	base schemastaging organization_extra phone_number base schemastaging phone_sandbox product_or_service
+who did  e1  get engaged to	people person spouse_s people marriage spouse
+who did  e1  get engaged to	celebrities celebrity sexual_relationships celebrities romantic_relationship celebrity
+what movies does  e1  play in	film actor film film performance film
+what instruments does  e1  use	music group_member instruments_played
+what instruments does  e1  use	music group_member instruments_played
+who does  e1  play with	base x2010fifaworldcupsouthafrica world_cup_participant world_cup_team base x2010fifaworldcupsouthafrica current_world_cup_squad current_club
+who does  e1  play with	base schemastaging athlete_extra salary base schemastaging athlete_salary team
+what is the language spoken in  e1 	location country languages_spoken
+who was  e1   s first wife	people person spouse_s people marriage spouse
+where do  e1  devils live	book book_subject works
+what a city in  e1 	base aareas schema administrative_area capital
+what a city in  e1 	location us_state capital
+what a city in  e1 	location administrative_division capital location administrative_division_capital_relationship capital
+what was the  e1  old name	sports sports_team previously_known_as
