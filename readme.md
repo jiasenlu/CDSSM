@@ -45,7 +45,7 @@ tgtVoc contains vocabulary: 10876
 
 ##To-do List
 
-* testing the C implementation of sparse Linear.
-* implement the C implementation of sparse convolution.
+* testing the cu implementation of sparse Linear.
+* implement the cu implementation of sparse convolution.
 
 
