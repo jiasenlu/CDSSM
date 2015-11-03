@@ -8,8 +8,7 @@
 
 ##dependencies:
 * torch
-* tds
-* iconv
+* tds (DSSM dense)
 
 ##Data Preprocessing
 ###Related Functions:
