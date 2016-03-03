@@ -1,4 +1,4 @@
-## Note: Still in developing.
+## Note: Currently, we only have torch c version batch input sparse linear and sparse covolution. 
 
 ##implementation of (c)DSSM in torch
 
